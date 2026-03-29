@@ -5,6 +5,8 @@ const char* OTAupdateHtml = R"rawliteral(
 <head>
   <meta charset="UTF-8">
   <title>OTA Update</title>
+  <script src="/JS_Commun"></script>
+  <script src="/JS_Traduction"></script>
   <style>
     body {
       font-family: Arial;
@@ -107,7 +109,11 @@ const char* OTAupdateHtml = R"rawliteral(
     }
     .bouton{
       margin:auto;
-      margin border-bottom: 10px;
+      margin-bottom: 10px;
+    }
+    .LeBas{
+      display:flex;
+      justify-content: space-between;
     }
   </style>
 </head>
@@ -145,16 +151,20 @@ const char* OTAupdateHtml = R"rawliteral(
         <li data-i18n="Telecharge">1 - Téléchargez sur votre ordinateur, la version binaire du logiciel du Gluco-Monitor souhaitée
           <br>(Gluco-Monitor_x.x.x.bin) <span data-i18n="ClickBin"> -cliquant dessus-</span></li>
         <li data-i18n="SelectFile">--SelectFile--</li>
-        <li data-i18n="SendBin">3 - Cliquez sur "<span data-i18n="SendBinBut">---</span>"</li>
+        <li ><span data-i18n="SendBin">3 - Cliquez sur </span>'<span data-i18n="SendBinBut">---</span>'</li>
       </ul>
     </div>
     <form id="form">
       <input class="bouton" type="file" id="bin" accept=".bin" required>
       
-      <button type="submit"><span data-i18n="SendBinBut">---</span></button>
+      <button type="submit" id="boutonSubmit" data-i18n="SendBinBut">Submit</button>
     </form>
     <progress id="prog" max="100" value="0"></progress>
     <p id="status"></p>
+  </div>
+  <div class="LeBas">
+    <div>Version : <span id="version"></span></div>
+    <div><a href="https://f1atb.fr">https://F1ATB.fr</a></div>
   </div>
   <script>
     document.getElementById('form').onsubmit = async e => {
@@ -189,7 +199,9 @@ const char* OTAupdateHtml = R"rawliteral(
       xhr.send(fd);
     };
     function init(){
-       chargerLangue();
+       SetTraduction();
+       GH("Version_actu",Version);
+       GH("version",Version);
     }
   </script>
 </body>

@@ -1,9 +1,8 @@
 #pragma once
 #include <Arduino.h>
-#include "Libreview.h"
 
-#define Version "1.00d"
 #define HOSTNAME "GlucoMonit-"
+
 
 #define RecurrenceGlycemie 120000 // 2 minutes
 
@@ -11,6 +10,10 @@
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 #endif
+
+//============ Version et Build ==========
+extern const char* Version ;
+extern const char* BuildDate ;
 
 extern String ssid, password, hostname;
 extern String MyIP;
@@ -44,6 +47,8 @@ extern int16_t GlycemieVal, targetLow,targetHigh;
 extern String ES, FS, GS, RS, US;
 
 extern int16_t LuminositeNuit;
+
+extern bool SetupEnCours;
 
 //======= Page HTML Brute ============
 extern bool AutorisationPageBrute;

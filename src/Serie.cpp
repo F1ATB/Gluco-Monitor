@@ -105,6 +105,9 @@ void DecodeSerial()
         RecordFichierParametres();
       }
     }
+    if(sw.indexOf("erase")==0){ //Pour effacer la configuration
+      RemoveParametres();
+    }
   }
   SerialIn = "";
 }
@@ -119,6 +122,7 @@ password:...       | WiFi password / Mot de passe du WiFi
 lib-email:...@.... | Email LibreLinkUp account / Email compte LibreLinkUp
 lib-password:...   | Password LibreLinkUp / Mot de passe LibreLinkUp
 lib-zone:...       | no, eu, eu2, fr, de, us, ca, au, jp, ap, ae
+erase              | Erase parametres.json file / efface les paramètres
 restart            | To restart ESP32 / Pour redémarrer l'ESP32     
 H or / ou  ?       | Help / Pour avoir cette aide
 **************

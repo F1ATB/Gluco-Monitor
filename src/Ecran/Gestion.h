@@ -11,7 +11,7 @@
 #define pageAccueil 0
 #define pageConfiguration 1
 #define pageMessages 2
-//Pages Fixes
+//Pages Fixes  Les unités du chiffre donne les sous pages
 #define pageWifiList 10
 #define pageClavier_WifiPwd 11
 #define pageCompte 20
@@ -24,6 +24,7 @@
 #define pageLangue 60
 #define pageAutBrute 70
 #define pageAbout 80
+
 
 // Pin definitions
 #define GFX_BL 1
@@ -41,6 +42,8 @@
 #define C_orangeFonce RGB565(70, 50, 0)
 #define C_rougeFonce RGB565(70, 0, 0)
 #define C_grisFonce RGB565(50, 50, 50)
+#define C_grisMoyen RGB565(100, 100, 100)
+
 
 extern Arduino_Canvas *CanvaBase ;
 extern Arduino_Canvas *CanvaMessage ;
@@ -58,6 +61,8 @@ void AccueiLoop() ;
 void PrintCentre(Arduino_Canvas *canva, const String &S, int16_t X, int16_t Y, uint8_t Sz);
 void PrintGauche(Arduino_Canvas *canva, const String &S, int16_t X, int16_t Y, uint8_t Sz);
 void PrintDroite(Arduino_Canvas *canva, const String &S, int16_t X, int16_t Y, uint8_t Sz);
+void QuestionConfiguration(String Question, void (*fonctionSiOK)());
+void ClearClick();
 String utf8ToLatin15(const String &utf8);
 
 // Structure Boutons

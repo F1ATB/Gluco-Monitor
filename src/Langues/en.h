@@ -24,6 +24,7 @@ inline const char *LangEN = R"====(
   "PasReseau":"No WiFi network found",
   "reseauxTrouves":" networks found",
   "WaitGluco":"Waiting for glucose",
+  "ConfNul":"Incomplete configuration",
   "LoginFailed":" Unable to connect to Libreview, HTTP code: ",
   "LastGlyco":" Last known glucose: ",
   "le":" on ",
@@ -31,6 +32,7 @@ inline const char *LangEN = R"====(
   "GraphFailed":" No graph from Libreview, HTTP code: ",
   "NoRecentGluco":"No recent glucose",
   "LinkUpIndefini":"LibreLinkUp account not defined",
+  "ZoneLinkUp":"LibreLinkUp server region",
   "Serveur80":"Web server running on port 80",
   "Update":"Update",
   "UpdateComplete":"Update completed",
@@ -38,11 +40,12 @@ inline const char *LangEN = R"====(
   "Historique":"History",
   "Luminosite":"Night screen brightness",
   "Rotation":"Screen rotation",
-  "Refuse":"رفض",
+  "Refuse":"Refuse",
   "Accept":"Accept",
   "OKData":"Data access authorized",
   "Clavier":"Keyboard",
   "PassWiFi":"WiFi network password: ",
+  "SetLibreLinkUp":"Set LibreLinkUp parameters",
   "EmailLinkUp":"LibreLinkUp account email",
   "PasseLinkUp":"LibreLinkUp account password",
   "Modifier":"Edit",
@@ -75,7 +78,7 @@ inline const char *LangEN = R"====(
   "ClickBin":"by clicking on it",
   "SelectFile":"2 - Click 'Choose a file' and select this binary on your computer",
   "SendBin":"3 - Click ",
-  "SenBinBut":"Send binary",
+  "SendBinBut":"Send binary",
   "AutoOnMonitor":"Authorize access on the monitor"
 }
 )====";

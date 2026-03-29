@@ -71,9 +71,10 @@ void Init_Server()
         handleDoUpdate(request, filename, index, data, len, final);
       });
 
-  server.on("/Langue.json", HTTP_GET, [](AsyncWebServerRequest *request)
-            { 
-              String file;
+  server.on("/JS_Commun", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(200, "text/javascript", String(JS_Commun) +"\nconst Version = '" + String(Version) +"';"); });
+  server.on("/JS_Traduction", HTTP_GET, [](AsyncWebServerRequest *request)
+            {  String file;
               switch(LaLangue)
                   {
                       case LANG_EN:
@@ -92,9 +93,8 @@ void Init_Server()
                           file=String(LangIT);
                           break;
                   }
-              request->send(200, "application/json", file); });
-  server.on("/JS_Commun", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/javascript", JS_Commun); });
+              
+              request->send(200, "text/javascript",  "Traduction =" + file +";"); });
   server.on("/JS_Main", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(200, "text/javascript", JS_Main); });
   server.on("/LoginJSON", HTTP_GET, [](AsyncWebServerRequest *request)

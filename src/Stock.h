@@ -7,3 +7,4 @@
 void InitStock();
 void ReadFichierParametres();
 void RecordFichierParametres();
+void RemoveParametres();

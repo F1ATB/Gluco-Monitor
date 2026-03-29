@@ -5,8 +5,6 @@
 #include "time.h"
 #include "Langues/Langue.h"
 
-
-
 static bool flipCouleurs = false;
 static float dtReponse = 0.0;
 
@@ -29,7 +27,7 @@ void AccueiLoop()
     Trace_Gauge(CanvaAccueil);
 
     // HEURE
-    
+
     CanvaAccueil->setFont(u8g2_font_fub35_tf);
     if (HeureValide)
         PrintDroite(CanvaAccueil, Hmn, -1, EcranH / 9, 1);
@@ -37,7 +35,14 @@ void AccueiLoop()
     if (Glycemie == "")
     {
         CanvaAccueil->setFont(u8g2_font_helvB18_tf);
-        PrintCentre(CanvaAccueil, T("WaitGluco"), W2, C + 25, 1);
+        if (ssid.length() == 0 || libreEmail.length() < 4)
+        {
+            PrintCentre(CanvaAccueil, T("ConfNul"), W2, C + 25, 1);
+        }
+        else
+        {
+            PrintCentre(CanvaAccueil, T("WaitGluco"), W2, C + 25, 1);
+        }
     }
     else
     {
@@ -48,7 +53,6 @@ void AccueiLoop()
         CanvaAccueil->setFont(u8g2_font_10x20_tf);
         PrintGauche(CanvaAccueil, "mg/dL", W2 + R0, C + 20, 1);
 
-        
         Teta0 = -180 + 18 * GlycemieVal / 40;
         if (Teta0 > 0)
             Teta0 = 0;
@@ -146,7 +150,6 @@ void AccueiLoop()
         if (minutes >= 15)
             CanvaAccueil->setTextColor(RGB565_RED);
         PrintDroite(CanvaAccueil, String(buffer), EcranW, EcranH / 3, 1);
-        
     }
     else
     {
@@ -171,13 +174,12 @@ void AccueiLoop()
         }
         else
         {
-            CanvaAccueil->fillRect(dtReponse, EcranH - 10, dT, 10, C_grisFonce);
+            CanvaAccueil->fillRect(dtReponse, EcranH - 10, dT, 10, C_grisMoyen);
         }
     }
     if (dtReponse > float(EcranW + EcranW2)) // Pas normal, on dépasse largement la récurrence, on affiche un rectangle rouge
     {
         dtReponse = float(EcranW + 20);
-        
     }
     CanvaAccueil->fillRect(0, EcranH - 10, int(dtReponse), 10, RGB565_MAGENTA);
 

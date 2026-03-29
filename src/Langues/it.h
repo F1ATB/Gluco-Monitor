@@ -24,6 +24,7 @@ inline const char *LangIT = R"====(
   "PasReseau":"Nessuna rete WiFi trovata",
   "reseauxTrouves":" reti trovate",
   "WaitGluco":"In attesa della glicemia",
+  "ConfNul":"Configurazione incompleta",
   "LoginFailed":" Nessuna connessione a Libreview, codice HTTP: ",
   "LastGlyco":" Ultima glicemia nota: ",
   "le":" il ",
@@ -31,6 +32,7 @@ inline const char *LangIT = R"====(
   "GraphFailed":" Nessun grafico da Libreview, codice HTTP: ",
   "NoRecentGluco":"Nessuna glicemia recente",
   "LinkUpIndefini":"Account LibreLinkUp non definito",
+  "ZoneLinkUp":"Area del server LibreLinkUp",
   "Serveur80":"Server web attivo sulla porta 80",
   "Update":"Aggiornamento",
   "UpdateComplete":"Aggiornamento completato",
@@ -43,6 +45,7 @@ inline const char *LangIT = R"====(
   "OKData":"Accesso ai dati autorizzato",
   "Clavier":"Tastiera",
   "PassWiFi":"Password della rete WiFi: ",
+  "SetLibreLinkUp":"Impostare i parametri LibreLinkUp",
   "EmailLinkUp":"Email account LibreLinkUp",
   "PasseLinkUp":"Password account LibreLinkUp",
   "Modifier":"Modifica",
@@ -75,7 +78,7 @@ inline const char *LangIT = R"====(
   "ClickBin":"cliccando su di essa",
   "SelectFile":"2 - Clicca su 'Scegli file' e seleziona questo binario sul tuo computer",
   "SendBin":"3 - Clicca su ",
-  "SenBinBut":"Invia binario",
+  "SendBinBut":"Invia binario",
   "AutoOnMonitor":"Autorizza l'accesso sul monitor"
 }
 )====";

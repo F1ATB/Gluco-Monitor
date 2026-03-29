@@ -5,6 +5,7 @@
 #include <ArduinoJson.h>
 #include "Heure.h"
 #include "Langues/Langue.h"
+#include "Ecran/Gestion.h"
 
 
 void ReadFichierParametres();
@@ -43,6 +44,9 @@ void ReadFichierParametres() {
   String content = file.readString();  // lit tout le fichier
   file.close();
   DeserializeConfiguration(content);
+}
+void RemoveParametres(){
+  LittleFS.remove("/parametres.json");
 }
 
 void DeserializeConfiguration(String json) {

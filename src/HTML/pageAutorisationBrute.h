@@ -10,11 +10,12 @@ const char *AutBruteHtml = R"====(
     <meta charset="UTF-8">
     <title>Libreview DATA</title>
     <script src="/JS_Commun"></script>
+    <script src="/JS_Traduction"></script>
     <style>
         body {
             background: #f5f5f5;
             font-family: Arial;
-            text-align:center;
+            text-align: center;
         }
 
         a {
@@ -22,9 +23,10 @@ const char *AutBruteHtml = R"====(
             text-decoration: none;
         }
 
-        .annul{
-            font-size:30px;
+        .annul {
+            font-size: 30px;
         }
+
         .top {
             width: 100%;
             display: flex;
@@ -48,7 +50,7 @@ const char *AutBruteHtml = R"====(
         #Menudroite {
             text-align: right;
             width: 50%;
-            
+
         }
 
         .Menugauche {
@@ -57,7 +59,11 @@ const char *AutBruteHtml = R"====(
             width: 50%;
         }
 
-
+        .LeBas {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -76,22 +82,25 @@ const char *AutBruteHtml = R"====(
         </div>
     </div>
     <h1>Gluco-Monitor Libreview DATA</h1>
-    <h2 data-i18n="AutoOnMonitor">&nbsp;  </h2>
-    <button class="annul" type="button" onclick="window.location.href='/'"  data-i18n="Cancel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-    
+    <h2 data-i18n="AutoOnMonitor">&nbsp; </h2>
+    <button class="annul" type="button" onclick="window.location.href='/'"
+        data-i18n="Cancel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
 
+    <div class="LeBas">
+        <div>Version : <span id="version"></span></div>
+        <div><a href="https://f1atb.fr">https://F1ATB.fr</a></div>
+    </div>
     <script>
-        
-        function ReLoad(){
+
+        function ReLoad() {
             location.reload();
         }
         setInterval(ReLoad, 2500);
-         function Init() {
-            chargerLangue();
-    
-            
+        function Init() {
+            SetTraduction();
+            GH("version",Version);
         }
-        
+
     </script>
 
 </body>

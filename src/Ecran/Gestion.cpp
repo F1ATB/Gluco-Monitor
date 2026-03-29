@@ -5,6 +5,7 @@
 #include <U8g2lib.h>
 
 #include "Config.h"
+#include "Serie.h"
 #include "Ecran/Gestion.h"
 #include "Ecran/pageMessages.h"
 #include "Ecran/pageClavier.h"
@@ -44,7 +45,7 @@ static unsigned long LastClickMillis = 0, PeriodeRafraichissement = 0, ClickLong
 
 // Ecran
 int16_t EcranW, EcranH, EcranW2, EcranH2, EcranH_20, EcranH_30;
-int8_t rotation = 3;
+int8_t rotation = 1;
 
 // Prototypes
 bool getTouchPoint(uint16_t &x, uint16_t &y, int16_t &dX, int16_t &dY);
@@ -52,6 +53,8 @@ void PrintCentre(Arduino_Canvas *canva, const String &S, int16_t X, int16_t Y, u
 void PrintGauche(Arduino_Canvas *canva, const String &S, int16_t X, int16_t Y, uint8_t Sz);
 void PrintDroite(Arduino_Canvas *canva, const String &S, int16_t X, int16_t Y, uint8_t Sz);
 String utf8ToLatin15(const String &utf8);
+void TraceEcranAccueil();
+void ClearClick();
 
 void InitEcran()
 {
@@ -93,22 +96,14 @@ void InitEcran()
   ledcAttach(GFX_BL, 5000, 8); //  5kHz, 8 bits de résolution
   // Baisser la luminosité (0 = éteint, 255 = max)
   ledcWrite(GFX_BL, 255);
-  Trace_Gauge(CanvaBase);
-  CanvaBase->setTextColor(RGB565_WHITE);
-  CanvaBase->setFont(u8g2_font_fub35_tf);
-  PrintCentre(CanvaBase, "Gluco-Monitor", EcranW2, EcranH2 - 10, 1);
-  CanvaBase->setFont(u8g2_font_helvB18_tf);
-  PrintDroite(CanvaBase, T("byF1ATB"), EcranW - 10, EcranH - 30, 1);
-  CanvaBase->setFont(u8g2_font_helvB14_tf);
-  PrintGauche(CanvaBase, "https://F1ATB.fr", 10, EcranH - 24, 1);
-  CanvaBase->flush();
+  TraceEcranAccueil();
   Serial.println("Ecran Init");
-  delay(3000);
+  delay(4000);
 
   AccueilInit();
   MessagesInit();
   ParaInit();
-  getTouchPoint(touchX, touchY, DeltaTouchX, DeltaTouchY); // pour initialiser les variables de touché
+  ClearClick(); // pour initialiser les variables de touché
   PageDelta = 0;
 }
 
@@ -124,7 +119,7 @@ void loopEcran()
     if (getTouchPoint(touchX, touchY, DeltaTouchX, DeltaTouchY))
     {
 
-      if (PageActu < PageTotalTournante)
+      if (PageActu < PageTotalTournante && !SetupEnCours)
       //===============
       { // Touché  Pages tournantes
         //=================
@@ -150,19 +145,19 @@ void loopEcran()
       //================
       { // Touché Pages fixes
         //=================
-        if (millis() - LastClickPageFixe < 200)
+        if (millis() - LastClickPageFixe < 100)
           return; // Anti-rebond simple
 
         PageDelta = 0;
-        if (DeltaTouchX < -6) // On veut revenir à la page de configuration generale
+        if (DeltaTouchX < -10) // On veut revenir à la page de configuration generale
         {
-          PageActu = pageConfiguration;
-          PageDelta = 480; // Delta en pixels
+            PageActu = pageConfiguration;
+            PageDelta = 480; // Delta en pixels
         }
-        else if (DeltaTouchX > 6)
-        {
-          PageActu = pageConfiguration;
-          PageDelta = -480; // Delta en pixels
+        else if (DeltaTouchX > 10)
+        {         
+            PageActu = pageConfiguration;
+            PageDelta = -480; // Delta en pixels
         }
         else
         {
@@ -189,7 +184,7 @@ void loopEcran()
             handleTouch_Affichage(touchX, touchY);
             break;
           case pageFuseauH:
-            handleTouch_Fuseau(touchX, touchY,DeltaTouchY);
+            handleTouch_Fuseau(touchX, touchY, DeltaTouchY);
             break;
           case pageLangue:
             handleTouch_Langue(touchX, touchY);
@@ -198,7 +193,7 @@ void loopEcran()
             handleTouch_AutBrute(touchX, touchY);
             break;
           case pageAbout:
-            handleTouch_About(touchX, touchY,DeltaTouchY);
+            handleTouch_About(touchX, touchY, DeltaTouchY);
             break;
           }
         }
@@ -364,6 +359,15 @@ bool getTouchPoint(uint16_t &x, uint16_t &y, int16_t &dX, int16_t &dY)
     dX = 1000; // Pas valide
   }
   return valide;
+}
+void ClearClick()
+{ // evitez rebonds
+  uint16_t Tx, Ty;
+  int16_t dX, dY;
+  delay(100);
+  bool bidon = getTouchPoint(Tx, Ty, dX, dY);
+  PageDelta=0;
+  delay(100);
 }
 //===========================
 // Fonctions d'affichage de texte
@@ -539,7 +543,7 @@ void Bouton_Trace(Bouton &B, uint16_t colorBord, Arduino_Canvas *canva)
   int16_t x1, y1;
   uint16_t w, h;
   canva->getTextBounds(utf8ToLatin15(B.Texte), 0, 0, &x1, &y1, &w, &h);
-  PrintCentre(canva, B.Texte, B.X0 + B.W / 2, B.Y0 + (B.H + h) / 2 -2, 1);
+  PrintCentre(canva, B.Texte, B.X0 + B.W / 2, B.Y0 + (B.H + h) / 2 - 2, 1);
 }
 
 bool RadioBouton_Appui(RadioBouton &rb, int16_t x, int16_t y)
@@ -555,7 +559,7 @@ void RadioBouton_Trace(RadioBouton &rb, uint16_t colorCentre)
   CanvaBase->drawCircle(rb.X0 + rb.R, rb.Y0 + rb.R, rb.R, RGB565_WHITE);
   CanvaBase->setFont(u8g2_font_10x20_mf);
   CanvaBase->setTextColor(RGB565_WHITE);
-  PrintGauche(CanvaBase, rb.Texte, rb.X0 + 2 * rb.R+2, rb.Y0 + rb.R +2, 1);
+  PrintGauche(CanvaBase, rb.Texte, rb.X0 + 2 * rb.R + 2, rb.Y0 + rb.R + 2, 1);
 }
 void AlertePasdeGlycemie()
 {
@@ -567,4 +571,57 @@ void AlertePasdeGlycemie()
   CanvaBase->flush();
   delay(10000);
   ESP.restart();
+}
+
+//=== Au premier lancement, configuration à demander sur demi écran du bas, Attend 10s
+void QuestionConfiguration(String Question, void (*fonctionSiOK)())
+{
+  uint16_t Tx, Ty;
+  int16_t dX, dY;
+  CanvaBase->fillRect(0, EcranH2, EcranW, EcranH2, RGB565_BLACK);
+  CanvaBase->fillRoundRect(10, 185, EcranW - 20, 80, 8, RGB565_NAVY);
+  CanvaBase->drawRoundRect(10, 185, EcranW - 20, 80, 8, RGB565_WHITE);
+  Bouton Boutons[1] = {
+      {25, 200, 430, 50, "Question"}};
+  Boutons[0].Texte = Question;
+  Bouton_Trace(Boutons[0], RGB565_WHITE, CanvaBase);
+  CanvaBase->flush();
+  bool notClick = true;
+  unsigned long T0 = millis();
+  while (notClick && (millis() - T0 < 10000))
+  {
+    if (getTouchPoint(Tx, Ty, dX, dY))
+    {
+      if (Bouton_Appui(Boutons[0], Tx, Ty, CanvaBase))
+      {
+        ClearClick();
+        fonctionSiOK();
+        int16_t PageConcerne = PageActu / 10;
+        notClick = false;
+        while (PageActu / 10 == PageConcerne)
+        { // On est dans la même famille de pages
+          loopEcran();
+          LireSerial();
+          delay(2);
+        }
+      }
+    }
+  }
+
+  TraceEcranAccueil();
+  ClearClick();
+}
+void TraceEcranAccueil()
+{
+  CanvaBase->fillRect(0, 0, EcranW, EcranH, RGB565_BLACK);
+  Trace_Gauge(CanvaBase);
+  CanvaBase->setTextColor(RGB565_WHITE);
+  CanvaBase->setFont(u8g2_font_fub35_tf);
+  PrintCentre(CanvaBase, "Gluco-Monitor", EcranW2, EcranH2 - 10, 1);
+  CanvaBase->setFont(u8g2_font_helvB18_tf);
+  PrintDroite(CanvaBase, T("byF1ATB"), EcranW - 10, EcranH - 30, 1);
+  CanvaBase->setFont(u8g2_font_helvB14_tf);
+  PrintGauche(CanvaBase, "https://F1ATB.fr", 10, EcranH - 30, 1);
+  CanvaBase->flush();
+  delay(500);
 }

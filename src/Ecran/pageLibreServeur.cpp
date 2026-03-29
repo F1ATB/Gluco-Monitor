@@ -20,14 +20,14 @@ void pageLibreServeurSetup()
 {
     PageActu = pageLibreServeur;
     BoutonBas[0].Texte=T("Cancel");
-    String Titre = "Sélectionner la zone du serveur LibreLinkUp";
+    String Titre = T("ZoneLinkUp");
     CanvaBase->fillScreen(C_grisFonce);
-    CanvaBase->setTextColor(RGB565_BLACK);
+    CanvaBase->setTextColor(RGB565_WHITE);
     CanvaBase->setFont(u8g2_font_helvB14_tf);
     PrintCentre(CanvaBase, Titre, EcranW / 2, 30, 1);
     CanvaBase->fillRoundRect(7, 50, EcranW - 14, EcranH - 90, 8, RGB565_NAVY);
     CanvaBase->drawRoundRect(7, 50, EcranW - 14, EcranH - 90, 8, RGB565_WHITE);
-    CanvaBase->setTextColor(RGB565_WHITE);
+    
     int X,Y;
     for (int i=0;i<12;i++)
     {

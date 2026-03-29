@@ -6,7 +6,7 @@
 
 
 
-int8_t LaLangue = LANG_EN;
+int8_t LaLangue = LANG_NONDEF;
 String LangueSymbole[5] ={"en","fr","de","es","it"};
 
 String T(String key) { //Traduction phrase dans la langue

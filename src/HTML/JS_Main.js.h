@@ -70,7 +70,8 @@ function init() {
     GID("z4").setAttribute("d", arc(45, 90));
 
     GID("valeur").textContent=".....";
-    chargerLangue();
+    SetTraduction();
+    GH("version",Version);
     setInterval(Sequenceur1s, 1000);
     
 

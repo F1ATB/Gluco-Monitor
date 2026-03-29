@@ -10,6 +10,7 @@ const char *BruteHtml = R"====(
     <meta charset="UTF-8">
     <title>Libreview DATA</title>
     <script src="/JS_Commun"></script>
+    <script src="/JS_Traduction"></script>
     <style>
         body {
             background: #f5f5f5;
@@ -93,6 +94,11 @@ const char *BruteHtml = R"====(
             background-color: lightgrey;
             padding: 2px;
         }
+        .LeBas{
+            display:flex;
+            justify-content: space-between;
+            margin-top:10px;
+            }
     </style>
 </head>
 
@@ -121,7 +127,10 @@ const char *BruteHtml = R"====(
     <div id="ConnectionJSON"></div>
     <h3 data-i18n="GraphLibreview">Graphe de Libreview</h3>
     <div id="GraphJSON"></div>
-
+    <div class="LeBas">
+    <div>Version : <span id="version"></span></div>
+    <div><a href="https://f1atb.fr">https://F1ATB.fr</a></div>
+  </div>
     <script>
         function createNode(key, value) {
             const li = document.createElement("li");
@@ -241,10 +250,11 @@ const char *BruteHtml = R"====(
         }
 
         function Init() {
-            chargerLangue();
+            SetTraduction();
             LoadLoginJSON();
             LoadConnectionJSON();
-            LoadGraphJSON()
+            LoadGraphJSON();
+            GH("version",Version);
         }
 
     </script>

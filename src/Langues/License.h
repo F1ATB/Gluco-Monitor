@@ -26,7 +26,7 @@ const char *Disclaimer = R"====(
 Disclaimer
 
 Gluco-Monitor is designed to allow you to read data from your Freestyle Libre 2/3 continuous glucose monitoring (CGM) system, stored in the Abbott database.
-Please note that this software is not officially supported by Abbott/Freestyle and was reverse engineered for educational purposes.
+Please note that this software is not officially supported by Abbott/Freestyle and was developed through reverse engineering and internet research.
 
 FreeStyle, Libre, Libreview, LibreLinkUp and related brand marks are trademarks of Abbott Diabetes Care Inc. in various jurisdictions.
 Other trademarks are the property of their respective owners.
@@ -46,7 +46,7 @@ const char *Avertissement = R"====(
 Avertissement
 
 Gluco-Monitor est conçu pour vous permettre  de lire les données de votre système de surveillance continue du glucose (CGM) Freestyle Libre 2/3, stockées dans la base de données d'Abbott.
-Veuillez noter que ce logiciel n'est pas officiellement pris en charge par Abbott/Freestyle et a été développé par rétro-ingénierie à des fins pédagogiques.
+Veuillez noter que ce logiciel n'est pas officiellement pris en charge par Abbott/Freestyle et a été développé par rétro-ingénierie et recherches sur Internet.
 
 FreeStyle, Libre, Libreview, LibreLinkUp et les marques associées sont des marques déposées d'Abbott Diabetes Care Inc. dans différentes juridictions.
 Les autres marques déposées appartiennent à leurs propriétaires respectifs.

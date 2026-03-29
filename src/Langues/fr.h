@@ -1,5 +1,4 @@
 #pragma once
-
 inline const char *LangFR = R"====(
 {
   "Age":"Age",
@@ -25,6 +24,7 @@ inline const char *LangFR = R"====(
   "PasReseau":"Pas de réseau WiFi trouvé",
   "reseauxTrouves":" réseaux trouvés",
   "WaitGluco":"Attente glycémie",
+  "ConfNul":"Configuration incomplète",
   "LoginFailed":" Pas de connexion à Libreview, HTTP code : ",
   "LastGlyco":" Dernière Glycémie connue : ",
   "le":" le ",
@@ -32,6 +32,7 @@ inline const char *LangFR = R"====(
   "GraphFailed":" Pas de graphique de Libreview, HTTP code : ",
   "NoRecentGluco":"Pas de glycémie récente",
   "LinkUpIndefini":"Compte LibreLinkUp non défini",
+  "ZoneLinkUp":"Zone serveur LibreLinkUp",
   "Serveur80":"Serveur Web actif sur le port 80",
   "Update":"Mise à jour",
   "UpdateComplete":"Mise à jour terminée",
@@ -44,6 +45,7 @@ inline const char *LangFR = R"====(
   "OKData":"Autorisation accès aux données",
   "Clavier":"Clavier",
   "PassWiFi":"Mot de passe du réseau WiFi : ",
+  "SetLibreLinkUp":"Définir les paramètres LibreLinkUp",
   "EmailLinkUp":"Email du compte LibreLinkUp",
   "PasseLinkUp":"Mot de passe du compte LibreLinkUp",
   "Modifier":"Modifier",
@@ -76,7 +78,7 @@ inline const char *LangFR = R"====(
   "ClickBin":"en cliquant dessus",
   "SelectFile":"2 - Cliquez sur 'Choisir un fichier' et sélectionnez ce binaire sur votre ordinateur",
   "SendBin":"3 - Cliquez sur ",
-  "SenBinBut":"Envoyer le binaire",
+  "SendBinBut":"Envoyer le binaire",
   "AutoOnMonitor":"Autorisez l'accès sur le moniteur"
 }
 )====";

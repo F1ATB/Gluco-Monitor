@@ -30,13 +30,13 @@ const char *alphaKeys[4][10] = {
     {"A", "Z", "E", "R", "T", "Y", "U", "I", "O", "P"},
     {"Q", "S", "D", "F", "G", "H", "J", "K", "L", "M"},
     {"W", "X", "C", "V", "B", "N", ".", "-", "@", "_"},
-    {"SHIFT", "SPACE", "DEL", "123", "Annul.", "OK", "", "", "", ""}};
+    {"SHIFT", "SPACE", "DEL", "123", "Cancel", "OK", "", "", "", ""}};
 
 const char *numKeys[4][10] = {
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"},
     {"+", "-", "*", "/", "=", "%", "(", ")", "#", "!"},
     {".", ",", "?", ";", ":", "'", "\"", "&", "€", "$"},
-    {"ABC", "SPACE", "DEL", ".com", "Annul.", "OK", "", "", "", ""}};
+    {"ABC", "SPACE", "DEL", ".com", "Cancel", "OK", "", "", "", ""}};
 
 void Position(int row, int col, int &x, int &y, int &keyWidth, int &keyHeight);
 
@@ -154,7 +154,7 @@ void handleTouch_clavier(int tx, int ty)
           textBuffer += " ";
         else if (key == "DEL" && textBuffer.length() > 0)
           textBuffer.remove(textBuffer.length() - 1);
-        else if (key == "Annul.")
+        else if (key == "Cancel")
         {
           textBuffer = "";
           if (PageActu == pageClavier_WifiPwd)

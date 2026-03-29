@@ -1,5 +1,6 @@
 #include "Config.h"
 #include "Heure.h"
+#include "Ecran/Gestion.h"
 
 #include <Arduino.h>
 
@@ -141,7 +142,7 @@ void DefFuseauHoraire(void)
 {
 
   // Heure / Hour . A Mettre en priorité avant WIFI (exemple ESP32 Simple Time)
-  // External timer to obtain the Hour and reset Watt Hour every day at 0h
+  // External timer to obtain the Hour 
   sntp_set_sync_interval(10800000); // Synchro toutes les 3h
   sntp_set_time_sync_notification_cb(time_sync_notification);
   // sntp_servermode_dhcp(1);   Déprecié

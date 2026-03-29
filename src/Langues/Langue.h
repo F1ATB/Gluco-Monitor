@@ -9,6 +9,7 @@
 
 
 //Pages tournantes
+#define LANG_NONDEF -1
 #define LANG_EN 0
 #define LANG_FR 1
 #define LANG_DE 2

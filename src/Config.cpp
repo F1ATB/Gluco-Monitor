@@ -1,8 +1,10 @@
 #include "Config.h"
 #include <Arduino.h>
+#include "Libreview.h"
 
-
-
+//============ Version et Build ==========
+const char* Version = PROG_VERSION;
+const char* BuildDate = BUILD_DATE;
 
 //======= VARIABLES ========
 String ssid = "", password = "", hostname = "";
@@ -46,6 +48,8 @@ int8_t TrendArrow = 0; // 0=non défini, 1=Flèche vers le bas, 2=Flèche vers l
 unsigned long lastGlyUnixTime = 0; // Heure de la dernière glycémie reçue en format Unix Time
 int16_t targetLow=70,targetHigh=180; //Seuils zone verte
 
+
+//Generaux
 String ES = String((char)27); // ESC Separator
 String FS = String((char)28); // File Separator
 String GS = String((char)29); // Group Separator
@@ -53,6 +57,8 @@ String RS = String((char)30); // Record Separator
 String US = String((char)31); // Unit Separator
 
 int16_t LuminositeNuit=255; //Maximum
+
+bool SetupEnCours=true;
 
 //======= Page HTML Brute ============
 bool AutorisationPageBrute=false;

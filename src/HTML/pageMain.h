@@ -86,10 +86,17 @@ const char *MainHtml = R"====(
             text-align: right;
             font-size: 30px;
         }
+        .LeBas{
+            display:flex;
+            justify-content: space-between;
+            color:white;
+            margin-top:10px;
+        }
     </style>
     <title>Gluco-Monitor</title>
     <script src="/JS_Commun"></script>
     <script src="/JS_Main"></script>
+    <script src="/JS_Traduction"></script>
 </head>
 
 <body onload="init();">
@@ -132,7 +139,10 @@ const char *MainHtml = R"====(
     </div>
     <div id="svgGraphe"></div>
 
-
+    <div class="LeBas">
+    <div>Version : <span id="version"></span></div>
+    <div><a href="https://f1atb.fr">https://F1ATB.fr</a></div>
+  </div>
 
 
 </body>
@@ -159,7 +169,7 @@ const char *RestartHtml = R"====(
 
 )====";
 
-// icône panneaux solaire et soleil (Merci michy)
+// icône 64pixels
 const char * Favicon = R"====(
 <svg width="64" height="64" viewBox="0 20 180 90" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -173,7 +183,7 @@ const char * Favicon = R"====(
   <path class="gp" stroke="red" d="M 137.73,32.27 A 67.5,67.5 0 0,1 157.5,80" />
 </svg>
 )====";
-// icône panneaux solaire et soleil 192pixels
+// icône 192pixels
 const char * Favicon192 = R"====(
 <svg width="192" height="192" viewBox="0 20 180 90" xmlns="http://www.w3.org/2000/svg">
   <defs>

@@ -24,6 +24,7 @@ inline const char *LangDE = R"====(
   "PasReseau":"Kein WLAN-Netzwerk gefunden",
   "reseauxTrouves":" Netzwerke gefunden",
   "WaitGluco":"Warten auf Glukosewert",
+  "ConfNul":"Unvollständige Konfiguration",
   "LoginFailed":" Keine Verbindung zu Libreview, HTTP-Code: ",
   "LastGlyco":" Letzter bekannter Glukosewert: ",
   "le":" am ",
@@ -31,6 +32,7 @@ inline const char *LangDE = R"====(
   "GraphFailed":" Kein Diagramm von Libreview, HTTP-Code: ",
   "NoRecentGluco":"Keine aktuellen Glukosewerte",
   "LinkUpIndefini":"LibreLinkUp-Konto nicht definiert",
+  "ZoneLinkUp":"LibreLinkUp Serverbereich",
   "Serveur80":"Webserver läuft auf Port 80",
   "Update":"Aktualisierung",
   "UpdateComplete":"Aktualisierung abgeschlossen",
@@ -43,6 +45,7 @@ inline const char *LangDE = R"====(
   "OKData":"Zugriff auf Daten erlaubt",
   "Clavier":"Tastatur",
   "PassWiFi":"WLAN-Passwort: ",
+  "SetLibreLinkUp":"LibreLinkUp-Parameter festzulegen",
   "EmailLinkUp":"E-Mail des LibreLinkUp-Kontos",
   "PasseLinkUp":"Passwort des LibreLinkUp-Kontos",
   "Modifier":"Bearbeiten",
@@ -75,7 +78,7 @@ inline const char *LangDE = R"====(
   "ClickBin":"durch Anklicken",
   "SelectFile":"2 - Klicken Sie auf 'Datei auswählen' und wählen Sie diese Binärdatei auf Ihrem Computer aus",
   "SendBin":"3 - Klicken Sie auf ",
-  "SenBinBut":"Binärdatei senden",
+  "SendBinBut":"Binärdatei senden",
   "AutoOnMonitor":"Zugriff auf dem Monitor erlauben"
 }
 )====";
