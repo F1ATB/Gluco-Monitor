@@ -11,6 +11,7 @@ String LangueSymbole[5] ={"en","fr","de","es","it"};
 
 String T(String key) { //Traduction phrase dans la langue
     String file;
+   
     switch(LaLangue)
     {
         case LANG_EN:

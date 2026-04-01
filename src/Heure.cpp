@@ -128,6 +128,7 @@ void FormatteHeureDate()
   {
     ledcWrite(GFX_BL, 255); // Luminosité maximale le jour
   }
+
 }
 
 // **************

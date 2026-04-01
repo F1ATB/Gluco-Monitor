@@ -37,6 +37,7 @@ void setup()
 {
   Serial.begin(115200);
   SetupEnCours=true;
+  LaLangue = LANG_NONDEF;
   //=========== Watchdog initialisation ==========
   esp_task_wdt_deinit();
   esp_task_wdt_config_t wdt_cfg = {
@@ -114,6 +115,7 @@ void setup()
   Serial.printf("Free heap: %d\n", ESP.getFreeHeap());
   Serial.printf("Free PSRAM: %d\n", ESP.getFreePsram());
   SetupEnCours=false;
+
 }
 
 void loop()

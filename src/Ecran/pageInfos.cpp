@@ -29,11 +29,11 @@ void pageInfosSetup()
         PrintGauche(CanvaBase, T("NoWiFi") +ssid, 20, 140, 1);
     }
     PrintGauche(CanvaBase, hostname + ".local", EcranW2-10, 170, 1);
-    int Heures = T_On_seconde /3600;
-    int Minutes =T_On_seconde%60;
+    uint64_t Heures = T_On_seconde /3600;
+    uint64_t Minutes =(T_On_seconde % 3600) / 60;
     char value[40];
     String Gon=T("GlucoOn");
-    sprintf(value, "%s%2dh %02dmn", Gon.c_str(),Heures, Minutes);
+    sprintf(value, "%s%lluh %02llumn", Gon.c_str(),Heures, Minutes);
     PrintGauche(CanvaBase, String(value) , 20, 200, 1);
     PrintCentre(CanvaBase,"https://F1ATB.fr",EcranW2,EcranH-40,1);
     CanvaBase->flush();
