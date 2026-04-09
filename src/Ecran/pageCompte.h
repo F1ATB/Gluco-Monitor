@@ -4,3 +4,4 @@
 
 void CompteSetup();
 void handleTouch_Compte(uint16_t touchX, uint16_t touchY);
+void pageDexcomRegionSetup();

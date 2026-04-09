@@ -18,6 +18,8 @@
 #define pageClavier_CompteEmail 21
 #define pageClavier_ComptePwd 22
 #define pageLibreServeur 23
+#define pageClavier_DexcomUsername 24
+#define pageClavier_DexcomPwd 25
 #define pageInfos 30
 #define pageAffichage 40
 #define pageFuseauH 50

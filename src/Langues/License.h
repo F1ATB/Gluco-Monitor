@@ -25,14 +25,17 @@ SOFTWARE.
 const char *Disclaimer = R"====(
 Disclaimer
 
-Gluco-Monitor is designed to display data from your FreeStyle Libre 2/3 continuous glucose monitoring (CGM) system,
- as stored in the Abbott database.
+Gluco-Monitor is designed to allow you to view data from your continuous glucose monitoring (CGM) system
+FreeStyle Libre 2, 3 or Dexcom, stored on the respective servers.
 
 Please note that this software is not officially supported by Abbott or FreeStyle and was developed through
 reverse engineering and online research.
 
 FreeStyle, Libre, LibreView, LibreLinkUp, and related brand marks are trademarks of Abbott Diabetes Care Inc.
  in various jurisdictions. All other trademarks are the property of their respective owners. This software is not affiliated with Abbott Diabetes Care, Inc. or any of its subsidiaries.
+
+Dexcom and related brand marks are trademarks of Dexcom, Inc. in various jurisdictions. Other trademarks are the property of their respective owners.
+This software is not affiliated with Dexcom, Inc. or any of its subsidiaries
 
 Gluco-Monitor should not be used for medical diagnosis or treatment, 
 nor should it be used as a substitute for professional medical advice. Individual symptoms and circumstances may vary.
@@ -49,14 +52,19 @@ const char *Avertissement = R"====(
 Avertissement
 
 Gluco-Monitor est conçu pour vous permettre de consulter les données de votre système de surveillance continue du glucose (CGM)
- FreeStyle Libre 2 ou 3, stockées sur les serveurs d'Abbott. 
- Veuillez noter que ce logiciel n'est pas officiellement approuvé par Abbott/FreeStyle 
+ FreeStyle Libre 2 , 3 ou Dexcom, stockées sur les serveurs respectifs. 
+Veuillez noter que ce logiciel n'est pas officiellement approuvé par Abbott/FreeStyle 
  et a été développé par rétro-ingénierie et recherches indépendantes.
 
 FreeStyle, Libre, LibreView, LibreLinkUp et les logos associés sont des marques déposées d'Abbott Diabetes Care Inc. 
 dans diverses juridictions. 
 Toutes les autres marques appartiennent à leurs propriétaires respectifs. Ce logiciel n'est en aucun cas affilié à 
 Abbott Diabetes Care, Inc. ou à ses filiales.
+
+Dexcom et les marques associées sont des marques déposées de Dexcom, Inc. dans différentes juridictions. 
+Les autres marques appartiennent à leurs propriétaires respectifs.
+
+Ce logiciel n'est affilié ni à Dexcom, Inc. ni à aucune de ses filiales.
 
 Gluco-Monitor ne doit pas être utilisé pour établir un diagnostic médical, définir un traitement ou se substituer 
 aux conseils d'un professionnel de santé. Les symptômes et situations cliniques varient d'un individu à l'autre.

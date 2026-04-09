@@ -109,7 +109,8 @@ void Init_Server()
                 doc["TrendArrow"] = TrendArrow;
                 doc["lastGlyUnixTime"] = lastGlyUnixTime;
                 doc["targetLow"] = targetLow;
-                doc["targetHigh"] = targetHigh;                
+                doc["targetHigh"] = targetHigh;
+                doc["sensorType"] = (int)sensorType;
                 String Json;
                 serializeJson(doc, Json);
                 request->send(200, "application/json", Json); });

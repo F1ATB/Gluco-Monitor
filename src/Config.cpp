@@ -15,6 +15,14 @@ String librePass = "";
 String libreZone = "";
 bool ServerConnu = false;
 
+// Dexcom configuration
+String dexcomUsername = "";
+String dexcomPassword = "";
+String dexcomRegion = "Non-US"; // Default to "Non-US" region
+
+// Sensor selection
+SensorType sensorType = SENSOR_LIBRE; // Default to FreeStyle Libre
+
 //Regions possibles pour LibreLinkUp
 const char *regions[12] = {"General", "", "Europe", " Europe 2", "France", "Germany", "USA", "Canada", "Australia", "Japan ", "Asia Pacific", "UAE"};
 const char *regionsCode[12] = {"", "", "eu", "eu2", "fr", "de", "us", "ca", "au", "jp", "ap", "ae"};

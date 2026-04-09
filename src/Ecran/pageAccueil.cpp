@@ -35,7 +35,9 @@ void AccueiLoop()
     if (Glycemie == "")
     {
         CanvaAccueil->setFont(u8g2_font_helvB18_tf);
-        if (ssid.length() == 0 || libreEmail.length() < 4)
+        bool hasCredentials = (sensorType == SENSOR_LIBRE && libreEmail.length() >= 4) ||
+                              (sensorType == SENSOR_DEXCOM && dexcomUsername.length() >= 4);
+        if (ssid.length() == 0 || !hasCredentials)
         {
             PrintCentre(CanvaAccueil, T("ConfNul"), W2, C + 25, 1);
         }
@@ -227,7 +229,8 @@ void AccueiLoop()
                 if (heure >= 0 && lastHeure >= 0)
                 {
                     CanvaAccueil->drawFastVLine(x, EcranH10, 10, RGB565_WHITE);
-                    if (x < W)
+                    // Allow label to be drawn even at the edge (changed from x < W to x <= W + X0)
+                    if (x <= W + X0)
                         PrintGauche(CanvaAccueil, String(heure), x, EcranH - 5, 1);
                 }
                 lastHeure = heure;

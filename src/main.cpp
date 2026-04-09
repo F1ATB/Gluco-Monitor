@@ -1,7 +1,10 @@
 /*
  * FreeStyle, Libre, and related brand marks are trademarks of Abbott Diabetes Care Inc. in various jurisdictions.
  Other trademarks are the property of their respective owners.
- * This documentation is not affiliated with Abbott Diabetes Care, Inc. or any of its subsidiaries
+ * This software is not affiliated with Abbott Diabetes Care, Inc. or any of its subsidiaries
+
+ * Dexcom and related brand marks are trademarks of Dexcom, Inc. in various jurisdictions. Other trademarks are the property of their respective owners.
+ * This software is not affiliated with Dexcom, Inc. or any of its subsidiaries
  */
 
 #include <WiFi.h>
@@ -14,6 +17,7 @@
 
 #include "Heure.h"
 #include "Libreview.h"
+#include "Dexcom.h"
 #include "Config.h"
 #include "Stock.h"
 #include "Serie.h"
@@ -103,10 +107,14 @@ void setup()
 
   LireSerial();
 
-  //======== Demande compte LibreLinkUp si non défini =====================
-  if (libreEmail.length() < 4)
+  //======== Demande compte LibreLinkUp ou Dexcom si non défini =====================
+  if (sensorType == SENSOR_LIBRE && libreEmail.length() < 4)
   {
     QuestionConfiguration(T("SetLibreLinkUp"), CompteSetup);
+  }
+  else if (sensorType == SENSOR_DEXCOM && dexcomUsername.length() < 4)
+  {
+    QuestionConfiguration(T("SetDexcom"), CompteSetup);
   }
 
   esp_task_wdt_reset();
@@ -124,7 +132,15 @@ void loop()
   LireSerial();
   if (HeureValide)
   {
-    LectureGlycemie();
+    // Call appropriate sensor reading function based on sensor type
+    if (sensorType == SENSOR_LIBRE)
+    {
+      LectureGlycemie();
+    }
+    else if (sensorType == SENSOR_DEXCOM)
+    {
+      LectureDexcom();
+    }
     FormatteHeureDate();
   }
   loopEcran();
