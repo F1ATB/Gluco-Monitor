@@ -2,7 +2,7 @@
 #include "Config.h"
 #include <Arduino.h>
 #include "Ecran/Gestion.h"
-#include "Ecran/pageWiFiList.h"
+#include "Ecran/pageWifiList.h"
 #include "Ecran/pageClavier.h"
 #include "Ecran/pageCompte.h"
 #include "Ecran/pageInfos.h"

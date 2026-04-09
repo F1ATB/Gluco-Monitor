@@ -66,11 +66,16 @@ inline const char *LangEN = R"====(
   "byF1ATB":"by F1ATB",
   "Glucose":"Glucose",
   "dataLibreview":"Libreview data",
+  "dataDexcom":"Dexcom Share data",
   "Arbo":"Click {} to expand or collapse the tree",
   "DisplayArbo":"Libreview JSON message tree view",
+  "DisplayArboDexcom":"Dexcom Share JSON message tree view",
   "LogLibreview":"Libreview login",
+  "LogDexcom":"Dexcom Share login",
   "ConnectLibreview":"Connecting to Libreview",
+  "ConnectDexcom":"Connecting to Dexcom Share",
   "GraphLibreview":"Libreview graph",
+  "GraphDexcom":"Dexcom Share graph",
   "UpdateOTA":"Software update via OTA",
   "VersionNow":"Your current Gluco-Monitor version: ",
   "VersionDispo":"Available version(s): ",
@@ -79,6 +84,13 @@ inline const char *LangEN = R"====(
   "SelectFile":"2 - Click 'Choose a file' and select this binary on your computer",
   "SendBin":"3 - Click ",
   "SendBinBut":"Send binary",
-  "AutoOnMonitor":"Authorize access on the monitor"
+  "AutoOnMonitor":"Authorize access on the monitor",
+  "SensorType":"Sensor Type",
+  "SetDexcom":"Set Dexcom parameters",
+  "UsernameDexcom":"Dexcom Share username",
+  "PasseDexcom":"Dexcom Share password",
+  "Username":"Username",
+  "Region":"Region",
+  "DexcomIndefini":"Dexcom account not defined"
 }
 )====";

@@ -3,6 +3,11 @@
 
 #define HOSTNAME "GlucoMonit-"
 
+// Sensor types
+enum SensorType {
+    SENSOR_LIBRE = 0,
+    SENSOR_DEXCOM = 1
+};
 
 #define RecurrenceGlycemie 120000 // 2 minutes
 
@@ -22,6 +27,14 @@ extern String libreEmail;
 extern String librePass;
 extern String libreZone;
 extern bool ServerConnu;
+
+// Dexcom configuration
+extern String dexcomUsername;
+extern String dexcomPassword;
+extern String dexcomRegion;
+
+// Sensor selection
+extern SensorType sensorType;
 
 extern const char *regions[12];
 extern const char *regionsCode[12];

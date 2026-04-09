@@ -1,4 +1,4 @@
-#include "pageWiFiList.h"
+#include "pageWifiList.h"
 #include "Config.h"
 #include <Arduino.h>
 #include <WiFi.h>

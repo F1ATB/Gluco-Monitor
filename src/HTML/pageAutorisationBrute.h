@@ -75,13 +75,13 @@ const char *AutBruteHtml = R"====(
         <div id="Menudroite">
             <div class="MiniMenu">
                 <div><a href="/" data-i18n="Glucose">&nbsp;</a></div>
-                <div><a href="/Brute" data-i18n="dataLibreview">&nbsp;</a></div>
+                <div><a href="/Brute" data-i18n="dataLibreview" id="menuBrute">&nbsp;</a></div>
                 <div><a href="/OTA" data-i18n="Update">&nbsp;</a></div>
                 <div><a href="/Restart" data-i18n="Restart">&nbsp;</a></div>
             </div>
         </div>
     </div>
-    <h1>Gluco-Monitor Libreview DATA</h1>
+    <h1 id="pageTitle">Gluco-Monitor Libreview DATA</h1>
     <h2 data-i18n="AutoOnMonitor">&nbsp; </h2>
     <button class="annul" type="button" onclick="window.location.href='/'"
         data-i18n="Cancel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
@@ -97,7 +97,21 @@ const char *AutBruteHtml = R"====(
         }
         setInterval(ReLoad, 2500);
         function Init() {
-            SetTraduction();
+            // Fetch sensor type and update labels
+            fetch('/ajaxGlycemie')
+                .then(response => response.json())
+                .then(data => {
+                    const isDexcom = data.sensorType === 1; // 1 = SENSOR_DEXCOM
+                    if (isDexcom) {
+                        document.getElementById('menuBrute').setAttribute('data-i18n', 'dataDexcom');
+                        document.getElementById('pageTitle').textContent = 'Gluco-Monitor Dexcom Share DATA';
+                    }
+                    SetTraduction();
+                })
+                .catch(error => {
+                    console.error('Error fetching sensor type:', error);
+                    SetTraduction();
+                });
             GH("version",Version);
         }
 

@@ -66,11 +66,16 @@ inline const char *LangDE = R"====(
   "byF1ATB":"von F1ATB",
   "Glucose":"Glukose",
   "dataLibreview":"Libreview-Daten",
+  "dataDexcom":"Dexcom Share-Daten",
   "Arbo":"Klicken Sie auf {}, um die Baumstruktur zu öffnen oder zu schließen",
   "DisplayArbo":"Baumansicht der Libreview-JSON-Nachrichten",
+  "DisplayArboDexcom":"Baumansicht der Dexcom Share-JSON-Nachrichten",
   "LogLibreview":"Libreview-Anmeldung",
+  "LogDexcom":"Dexcom Share-Anmeldung",
   "ConnectLibreview":"Verbindung zu Libreview",
+  "ConnectDexcom":"Verbindung zu Dexcom Share",
   "GraphLibreview":"Libreview-Diagramm",
+  "GraphDexcom":"Dexcom Share-Diagramm",
   "UpdateOTA":"Software-Update über OTA",
   "VersionNow":"Ihre aktuelle Gluco-Monitor-Version: ",
   "VersionDispo":"Verfügbare Version(en): ",
@@ -79,7 +84,14 @@ inline const char *LangDE = R"====(
   "SelectFile":"2 - Klicken Sie auf 'Datei auswählen' und wählen Sie diese Binärdatei auf Ihrem Computer aus",
   "SendBin":"3 - Klicken Sie auf ",
   "SendBinBut":"Binärdatei senden",
-  "AutoOnMonitor":"Zugriff auf dem Monitor erlauben"
+  "AutoOnMonitor":"Zugriff auf dem Monitor erlauben",
+  "SensorType":"Sensortyp",
+  "SetDexcom":"Dexcom-Parameter festlegen",
+  "UsernameDexcom":"Dexcom Share Benutzername",
+  "PasseDexcom":"Dexcom Share Passwort",
+  "Username":"Benutzername",
+  "Region":"Region",
+  "DexcomIndefini":"Dexcom-Konto nicht definiert"
 }
 )====";
 

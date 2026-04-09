@@ -66,11 +66,16 @@ inline const char *LangIT = R"====(
   "byF1ATB":"di F1ATB",
   "Glucose":"Glicemia",
   "dataLibreview":"Dati Libreview",
+  "dataDexcom":"Dati Dexcom Share",
   "Arbo":"Clicca su {} per aprire o chiudere l'albero",
   "DisplayArbo":"Visualizzazione ad albero dei messaggi JSON Libreview",
+  "DisplayArboDexcom":"Visualizzazione ad albero dei messaggi JSON Dexcom Share",
   "LogLibreview":"Accesso a Libreview",
+  "LogDexcom":"Accesso a Dexcom Share",
   "ConnectLibreview":"Connessione a Libreview",
+  "ConnectDexcom":"Connessione a Dexcom Share",
   "GraphLibreview":"Grafico Libreview",
+  "GraphDexcom":"Grafico Dexcom Share",
   "UpdateOTA":"Aggiornamento software tramite OTA",
   "VersionNow":"La tua versione attuale di Gluco-Monitor: ",
   "VersionDispo":"Versione/i disponibile/i: ",
@@ -79,6 +84,13 @@ inline const char *LangIT = R"====(
   "SelectFile":"2 - Clicca su 'Scegli file' e seleziona questo binario sul tuo computer",
   "SendBin":"3 - Clicca su ",
   "SendBinBut":"Invia binario",
-  "AutoOnMonitor":"Autorizza l'accesso sul monitor"
+  "AutoOnMonitor":"Autorizza l'accesso sul monitor",
+  "SensorType":"Tipo di Sensore",
+  "SetDexcom":"Impostare i parametri Dexcom",
+  "UsernameDexcom":"Nome utente Dexcom Share",
+  "PasseDexcom":"Password Dexcom Share",
+  "Username":"Nome utente",
+  "Region":"Regione",
+  "DexcomIndefini":"Account Dexcom non definito"
 }
 )====";

@@ -11,7 +11,7 @@
 #include "Ecran/pageClavier.h"
 #include "Ecran/pageAccueil.h"
 #include "Ecran/pageConfiguration.h"
-#include "Ecran/pageWiFiList.h"
+#include "Ecran/pageWifiList.h"
 #include "Ecran/pageCompte.h"
 #include "Ecran/pageLibreServeur.h"
 #include "Ecran/pageInfos.h"
@@ -166,6 +166,8 @@ void loopEcran()
           case pageClavier_WifiPwd:
           case pageClavier_CompteEmail:
           case pageClavier_ComptePwd:
+          case pageClavier_DexcomUsername:
+          case pageClavier_DexcomPwd:
             handleTouch_clavier(touchX, touchY);
             break;
           case pageCompte:

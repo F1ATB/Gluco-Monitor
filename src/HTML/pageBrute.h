@@ -110,7 +110,7 @@ const char *BruteHtml = R"====(
         <div class="Menudroite">
             <div class="MiniMenu">
                 <div><a href="/" data-i18n="Glucose">-Glyc-</a></div>
-                <div class="MenuChoisi"><a href="/Brute" data-i18n="dataLibreview">-Libreview-</a></div>
+                <div class="MenuChoisi"><a href="/Brute" data-i18n="dataLibreview" id="menuBrute">-Libreview-</a></div>
                 <div><a href="/OTA" data-i18n="Update">-M à jour-</a></div>
                 <div><a href="/Restart" data-i18n="Restart">-Restart-</a></div>
             </div>
@@ -119,13 +119,13 @@ const char *BruteHtml = R"====(
 
 
     
-    <h2 data-i18n="DisplayArbo">-Affichage Arbo-</h2>
+    <h2 data-i18n="DisplayArbo" id="displayArbo">-Affichage Arbo-</h2>
     <h4 data-i18n="Arbo">-arborescence-</h4>
-    <h3 data-i18n="LogLibreview">-Log Libreview-</h3>
+    <h3 data-i18n="LogLibreview" id="logTitle">-Log Libreview-</h3>
     <div id="LoginJSON"></div>
-    <h3 data-i18n="ConnectLibreview">-ConnexionLibreview-</h3>
+    <h3 data-i18n="ConnectLibreview" id="connectTitle">-ConnexionLibreview-</h3>
     <div id="ConnectionJSON"></div>
-    <h3 data-i18n="GraphLibreview">Graphe de Libreview</h3>
+    <h3 data-i18n="GraphLibreview" id="graphTitle">Graphe de Libreview</h3>
     <div id="GraphJSON"></div>
     <div class="LeBas">
     <div>Version : <span id="version"></span></div>
@@ -250,7 +250,29 @@ const char *BruteHtml = R"====(
         }
 
         function Init() {
-            SetTraduction();
+            // Fetch sensor type and update labels
+            fetch('/ajaxGlycemie')
+                .then(response => response.json())
+                .then(data => {
+                    const isDexcom = data.sensorType === 1; // 1 = SENSOR_DEXCOM
+                    
+                    // Update data-i18n attributes based on sensor type
+                    if (isDexcom) {
+                        document.getElementById('menuBrute').setAttribute('data-i18n', 'dataDexcom');
+                        document.getElementById('displayArbo').setAttribute('data-i18n', 'DisplayArboDexcom');
+                        document.getElementById('logTitle').setAttribute('data-i18n', 'LogDexcom');
+                        document.getElementById('connectTitle').setAttribute('data-i18n', 'ConnectDexcom');
+                        document.getElementById('graphTitle').setAttribute('data-i18n', 'GraphDexcom');
+                    }
+                    
+                    // Apply translations after updating attributes
+                    SetTraduction();
+                })
+                .catch(error => {
+                    console.error('Error fetching sensor type:', error);
+                    SetTraduction(); // Fallback to default translations
+                });
+            
             LoadLoginJSON();
             LoadConnectionJSON();
             LoadGraphJSON();

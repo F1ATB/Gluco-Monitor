@@ -66,11 +66,16 @@ inline const char *LangFR = R"====(
   "byF1ATB":"de F1ATB",
   "Glucose":"Glycémie",
   "dataLibreview":"Données Libreview",
+  "dataDexcom":"Données Dexcom Share",
   "Arbo":"Cliquez sur {} pour ouvrir ou fermer l'arborescence",
   "DisplayArbo":"Affichage Arborescent Messages Libreview JSON",
+  "DisplayArboDexcom":"Affichage Arborescent Messages Dexcom Share JSON",
   "LogLibreview":"Login à Libreview",
+  "LogDexcom":"Login à Dexcom Share",
   "ConnectLibreview":"Connexion à Libreview",
+  "ConnectDexcom":"Connexion à Dexcom Share",
   "GraphLibreview":"Graphe de Libreview",
+  "GraphDexcom":"Graphe de Dexcom Share",
   "UpdateOTA":"Mise à jour logiciel par OTA",
   "VersionNow":"Votre version actuelle de Gluco-Monitor : ",
   "VersionDispo":"Version(s) disponible(s) : ",
@@ -79,6 +84,13 @@ inline const char *LangFR = R"====(
   "SelectFile":"2 - Cliquez sur 'Choisir un fichier' et sélectionnez ce binaire sur votre ordinateur",
   "SendBin":"3 - Cliquez sur ",
   "SendBinBut":"Envoyer le binaire",
-  "AutoOnMonitor":"Autorisez l'accès sur le moniteur"
+  "AutoOnMonitor":"Autorisez l'accès sur le moniteur",
+  "SensorType":"Type de Capteur",
+  "SetDexcom":"Définir les paramètres Dexcom",
+  "UsernameDexcom":"Nom d'utilisateur Dexcom Share",
+  "PasseDexcom":"Mot de passe Dexcom Share",
+  "Username":"Nom d'utilisateur",
+  "Region":"Région",
+  "DexcomIndefini":"Compte Dexcom non défini"
 }
 )====";

@@ -76,7 +76,15 @@ void DeserializeConfiguration(String json) {
   libreZone = conf["libreZone"].as<String>();
   LuminositeNuit = conf["LuminositeNuit"] | LuminositeNuit;
   LaLangue=conf["LaLangue"] | LaLangue;
- 
+  
+  // Dexcom configuration
+  dexcomUsername = conf["dexcomUsername"].as<String>();
+  dexcomPassword = conf["dexcomPassword"].as<String>();
+  dexcomRegion = conf["dexcomRegion"] | dexcomRegion;
+  
+  // Sensor type
+  int sensorTypeInt = conf["sensorType"] | SENSOR_LIBRE;
+  sensorType = (SensorType) sensorTypeInt;
 }
 
 String SerializeConfiguration() {
@@ -92,6 +100,15 @@ String SerializeConfiguration() {
   conf["libreZone"] = libreZone;
   conf["LuminositeNuit"] = LuminositeNuit;
   conf["LaLangue"]=LaLangue;
+  
+  // Dexcom configuration
+  conf["dexcomUsername"] = dexcomUsername;
+  conf["dexcomPassword"] = dexcomPassword;
+  conf["dexcomRegion"] = dexcomRegion;
+  
+  // Sensor type
+  conf["sensorType"] = (int) sensorType;
+  
   String Json;
   serializeJson(conf, Json);
   return Json;

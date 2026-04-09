@@ -163,8 +163,9 @@ void handleTouch_clavier(int tx, int ty)
             PageActu = pageConfiguration;
             return;
           }
-          if (PageActu == pageClavier_CompteEmail || PageActu == pageClavier_ComptePwd)
-          {            
+          if (PageActu == pageClavier_CompteEmail || PageActu == pageClavier_ComptePwd ||
+              PageActu == pageClavier_DexcomUsername || PageActu == pageClavier_DexcomPwd)
+          {
             CompteSetup();
       
             return;
@@ -187,14 +188,32 @@ void handleTouch_clavier(int tx, int ty)
           if (PageActu == pageClavier_CompteEmail)
           {
             libreEmail = textBuffer;
-            RecordFichierParametres();           
-            CompteSetup();         
+            RecordFichierParametres();
+            lastDemandeGlycMillis = 0; // Reset timer to trigger immediate glucose fetch
+            CompteSetup();
             return;
           }
           if (PageActu == pageClavier_ComptePwd)
           {
             librePass = textBuffer;
             RecordFichierParametres();
+            lastDemandeGlycMillis = 0; // Reset timer to trigger immediate glucose fetch
+            CompteSetup();
+            return;
+          }
+          if (PageActu == pageClavier_DexcomUsername)
+          {
+            dexcomUsername = textBuffer;
+            RecordFichierParametres();
+            lastDemandeGlycMillis = 0; // Reset timer to trigger immediate glucose fetch
+            CompteSetup();
+            return;
+          }
+          if (PageActu == pageClavier_DexcomPwd)
+          {
+            dexcomPassword = textBuffer;
+            RecordFichierParametres();
+            lastDemandeGlycMillis = 0; // Reset timer to trigger immediate glucose fetch
             CompteSetup();
             return;
           }
@@ -249,6 +268,16 @@ void setup_clavier()
   {
     Titre = T("PasseLinkUp");
     textBuffer = librePass;
+  }
+  if (PageActu == pageClavier_DexcomUsername)
+  {
+    Titre = T("UsernameDexcom");
+    textBuffer = dexcomUsername;
+  }
+  if (PageActu == pageClavier_DexcomPwd)
+  {
+    Titre = T("PasseDexcom");
+    textBuffer = dexcomPassword;
   }
 
   CanvaBase->setTextColor(RGB565_BLACK);

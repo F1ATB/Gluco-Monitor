@@ -126,7 +126,7 @@ const char* OTAupdateHtml = R"rawliteral(
     <div class="Menudroite">
       <div class="MiniMenu">
         <div><a href="/" data-i18n="Glucose">-Glyc-</a></div>
-                <div><a href="/Brute" data-i18n="dataLibreview">-Libreview-</a></div>
+                <div><a href="/Brute" data-i18n="dataLibreview" id="menuBrute">-Libreview-</a></div>
                 <div class="MenuChoisi"><a href="/OTA" data-i18n="Update">-M à jour-</a></div>
                 <div><a href="/Restart" data-i18n="Restart">-Restart-</a></div>
       </div>
@@ -199,7 +199,20 @@ const char* OTAupdateHtml = R"rawliteral(
       xhr.send(fd);
     };
     function init(){
-       SetTraduction();
+       // Fetch sensor type and update menu label
+       fetch('/ajaxGlycemie')
+           .then(response => response.json())
+           .then(data => {
+               const isDexcom = data.sensorType === 1; // 1 = SENSOR_DEXCOM
+               if (isDexcom) {
+                   document.getElementById('menuBrute').setAttribute('data-i18n', 'dataDexcom');
+               }
+               SetTraduction();
+           })
+           .catch(error => {
+               console.error('Error fetching sensor type:', error);
+               SetTraduction();
+           });
        GH("Version_actu",Version);
        GH("version",Version);
     }
