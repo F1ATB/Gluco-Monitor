@@ -6,3 +6,4 @@
 
 void LectureGlycemie();
 bool loginLibreLinkUp();
+void clearLibreViewCache();

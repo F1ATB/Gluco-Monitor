@@ -8,3 +8,4 @@
 void LectureDexcom();
 bool loginDexcomShare();
 void getDexcomReadings();
+void clearDexcomCache();

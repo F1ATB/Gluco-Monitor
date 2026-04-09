@@ -314,3 +314,14 @@ String getSHA256(String payload)
   }
   return hashStr;
 }
+
+void clearLibreViewCache()
+{
+  Serial.println("Clearing LibreView cache...");
+  AuthToken = "";
+  userID = "";
+  patientId = "";
+  SHAuserID = "";
+  UserOK = false;
+  baseURL = "";
+}

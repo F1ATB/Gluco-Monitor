@@ -158,8 +158,11 @@ void handleTouch_Compte(uint16_t touchX, uint16_t touchY)
         {
             if (sensorType != SENSOR_LIBRE) {
                 sensorType = SENSOR_LIBRE;
+                
+                // Clear all cached data when switching accounts
+                clearData();
+                
                 RecordFichierParametres();
-                lastDemandeGlycMillis = 0;
                 CompteSetup();
             }
             return;
@@ -170,8 +173,11 @@ void handleTouch_Compte(uint16_t touchX, uint16_t touchY)
         {
             if (sensorType != SENSOR_DEXCOM) {
                 sensorType = SENSOR_DEXCOM;
+                
+                // Clear all cached data when switching accounts
+                clearData();
+                
                 RecordFichierParametres();
-                lastDemandeGlycMillis = 0;
                 CompteSetup();
             }
             return;
@@ -282,12 +288,4 @@ void handleTouch_Compte(uint16_t touchX, uint16_t touchY)
         }
         CanvaBase->flush();
     }
-}
-
-void pageDexcomRegionSetup()
-{
-    // Simple region toggle for Dexcom (US vs Non-US)
-    dexcomRegion = (dexcomRegion == "US") ? "Non-US" : "US";
-    RecordFichierParametres();
-    CompteSetup();
 }
