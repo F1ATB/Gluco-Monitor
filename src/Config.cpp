@@ -1,5 +1,6 @@
 #include "Config.h"
 #include <Arduino.h>
+#include "Dexcom.h"
 #include "Libreview.h"
 
 //============ Version et Build ==========
@@ -76,5 +77,38 @@ unsigned long TimerAutorisationBruteMillis=0;
 EXT_RAM_BSS_ATTR char MessageEcran[8192];
 EXT_RAM_BSS_ATTR String LoginJSON = "", GraphJSON = "",ConnectionJSON = "";
 
-
+void clearData()
+{
+    Serial.println("Clearing all data (glucose, Dexcom cache, LibreView cache)...");
+    
+    // Clear glucose arrays
+    for (int i = 0; i < MAX_POINTS; i++) {
+        glucoseValues[i] = 0;
+        glucoseHeure[i] = 0;
+    }
+    
+    // Reset glucose variables
+    pointCountGly = 0;
+    Glycemie = "";
+    GlycemieVal = 0;
+    TrendArrow = 0;
+    lastGlyUnixTime = 0;
+    
+    // Clear JSON data
+    LoginJSON = "";
+    GraphJSON = "";
+    ConnectionJSON = "";
+    
+    // Reset timers to force immediate data fetch
+    lastDemandeGlycMillis = 0;
+    lastReceptionGlycMillis = 0;
+    lastGlycOkMillis = 0;
+    AgeGlycemie = 0;
+    
+    // Clear Dexcom cache
+    clearDexcomCache();
+    
+    // Clear LibreView cache
+    clearLibreViewCache();
+}
     

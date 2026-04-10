@@ -70,3 +70,6 @@ extern unsigned long TimerAutorisationBruteMillis;
 // PSRAM
 extern EXT_RAM_BSS_ATTR char MessageEcran[];
 extern EXT_RAM_BSS_ATTR String LoginJSON, GraphJSON, ConnectionJSON;
+
+// Clear all data (glucose, Dexcom cache, LibreView cache) when switching accounts
+void clearData();

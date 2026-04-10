@@ -289,3 +289,12 @@ void LectureDexcom()
         lastReceptionGlycMillis = millis();
     }
 }
+
+void clearDexcomCache()
+{
+    Serial.println("Clearing Dexcom cache...");
+    dexcomSessionId = "";
+    dexcomAccountId = "";
+    dexcomBaseURL = "https://shareous1.dexcom.com";
+}
+
