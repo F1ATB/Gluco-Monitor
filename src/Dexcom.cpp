@@ -259,19 +259,17 @@ void getDexcomReadings()
 
 void LectureDexcom()
 {
-    // Dexcom updates every 5 minutes (300 seconds)
-    // Don't contact server if we have recent data (less than 5 minutes old)
-    // Add 15 seconds to give a bit more time to the server
+    // Dexcom updates every 5 minutes (300 seconds) + 15 seconds extra
+    recurGlycMillis = 315000;
+    // Don't contact server if we have recent data
     if (AgeGlycemie < 315 && lastGlyUnixTime > 0) {
         // We have recent data, no need to poll yet
         return;
-    }
+    } 
     if (AgeGlycemie > 500) {
         recurGlycMillis = 90000; // 1.5 minutes if very old
-    } else if (AgeGlycemie > 300) {
+    } else if (AgeGlycemie > 315) {
         recurGlycMillis = 30000; // 30 seconds if data is old
-    } else {
-        recurGlycMillis = RecurrenceGlycemie;
     }
     
     if (millis() - lastReceptionGlycMillis > recurGlycMillis || lastDemandeGlycMillis == 0) {
