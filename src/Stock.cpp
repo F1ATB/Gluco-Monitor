@@ -85,6 +85,9 @@ void DeserializeConfiguration(String json) {
   // Sensor type
   int sensorTypeInt = conf["sensorType"] | SENSOR_LIBRE;
   sensorType = (SensorType) sensorTypeInt;
+
+  int glucoseUnitInt = conf["glucoseUnit"] | GLUCOSE_UNIT_MGDL;
+  glucoseUnit = (GlucoseUnit)glucoseUnitInt;
 }
 
 String SerializeConfiguration() {
@@ -108,6 +111,7 @@ String SerializeConfiguration() {
   
   // Sensor type
   conf["sensorType"] = (int) sensorType;
+  conf["glucoseUnit"] = (int) glucoseUnit;
   
   String Json;
   serializeJson(conf, Json);

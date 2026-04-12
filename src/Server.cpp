@@ -106,6 +106,7 @@ void Init_Server()
   server.on("/ajaxGlycemie", HTTP_GET, [](AsyncWebServerRequest *request)
             {JsonDocument doc;
                 doc["GlycemieVal"] = GlycemieVal;
+                doc["GlucoseUnitLabel"] = getGlucoseUnitLabel();
                 doc["TrendArrow"] = TrendArrow;
                 doc["lastGlyUnixTime"] = lastGlyUnixTime;
                 doc["targetLow"] = targetLow;

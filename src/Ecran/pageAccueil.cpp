@@ -50,10 +50,10 @@ void AccueiLoop()
     {
 
         CanvaAccueil->setFont(u8g2_font_inb63_mn);
-        PrintCentre(CanvaAccueil, Glycemie, W2, C + 25, 1);
+        PrintCentre(CanvaAccueil, formatGlucoseValue(GlycemieVal), W2, C + 25, 1);
 
         CanvaAccueil->setFont(u8g2_font_10x20_tf);
-        PrintGauche(CanvaAccueil, "mg/dL", W2 + R0, C + 20, 1);
+        PrintGauche(CanvaAccueil, getGlucoseUnitLabel(), W2 + R0, C + 20, 1);
 
         Teta0 = -180 + 18 * GlycemieVal / 40;
         if (Teta0 > 0)
