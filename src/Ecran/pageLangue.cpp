@@ -14,6 +14,10 @@ static RadioBouton Rboutons[5] = {
     {10, 130, 15, ""},
     {10, 130, 15, ""}};
 
+static RadioBouton UnitBoutons[2] = {
+    {10, 250, 15, "mg/dL"},
+    {10, 250, 15, "mmol/L"}};
+
 void DrawBoutons_();
 
 void pageLangueSetup()
@@ -26,6 +30,12 @@ void pageLangueSetup()
 
     CanvaBase->fillRoundRect(7, 80, EcranW - 14, 100, 8, RGB565_NAVY);
     CanvaBase->drawRoundRect(7, 80, EcranW - 14, 100, 8, RGB565_WHITE);
+
+    CanvaBase->fillRoundRect(7, 205, EcranW - 14, 90, 8, RGB565_NAVY);
+    CanvaBase->drawRoundRect(7, 205, EcranW - 14, 90, 8, RGB565_WHITE);
+    CanvaBase->setFont(u8g2_font_helvB14_tf);
+    PrintCentre(CanvaBase, T("GlucoseUnit"), EcranW / 2, 230, 1);
+
     DrawBoutons_();
     CanvaBase->flush();
 }
@@ -41,6 +51,18 @@ void handleTouch_Langue(uint16_t touchX, uint16_t touchY)
             RecordFichierParametres();
             pageLangueSetup();
             ParaInit();
+            return;
+        }
+    }
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (RadioBouton_Appui(UnitBoutons[i], touchX, touchY))
+        {
+            glucoseUnit = (i == 0) ? GLUCOSE_UNIT_MGDL : GLUCOSE_UNIT_MMOLL;
+            RecordFichierParametres();
+            pageLangueSetup();
+            return;
         }
     }
 }
@@ -57,6 +79,19 @@ void DrawBoutons_()
         else
         {
             RadioBouton_Trace(Rboutons[i]);
+        }
+    }
+
+    for (int i = 0; i < 2; i++)
+    {
+        UnitBoutons[i].X0 = EcranW * (i + 1) / 3;
+        if ((i == 0 && glucoseUnit == GLUCOSE_UNIT_MGDL) || (i == 1 && glucoseUnit == GLUCOSE_UNIT_MMOLL))
+        {
+            RadioBouton_Trace(UnitBoutons[i], RGB565_BLUE);
+        }
+        else
+        {
+            RadioBouton_Trace(UnitBoutons[i]);
         }
     }
 }

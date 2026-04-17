@@ -28,7 +28,7 @@ function arc(start, end) {
 
 /* aiguille */
 
-function setValue(v) { //Valeur de la Glycemie
+function setValue(v, unitLabel) { //Valeur de la Glycemie
     let x1, y1, x2, y2, x3, y3;
     let angle = -90 + (v * 180 / 400);
     let angle1 = -90;
@@ -53,7 +53,15 @@ function setValue(v) { //Valeur de la Glycemie
     y3 = p.y;
     let aig = document.getElementById("aiguille");
     aig.setAttribute("points", `${x1},${y1} ${x2},${y2} ${x3},${y3}`);
-    GID("valeur").textContent = Math.round(v);
+    
+    // Format value based on unit - gauge uses mg/dL for positioning, display shows correct unit
+    let displayValue;
+    if (unitLabel === "mmol/L") {
+        displayValue = (v / 18.0).toFixed(1);
+    } else {
+        displayValue = Math.round(v);
+    }
+    GID("valeur").textContent = displayValue;
 }
 
 /* demo animation */
@@ -196,8 +204,12 @@ function LoadLGlycemie() {
                 targetLow = obj.targetLow;
                 targetHigh = obj.targetHigh;
                 lastGlyUnixTime = obj.lastGlyUnixTime;
-                setValue(obj.GlycemieVal);
+                setValue(obj.GlycemieVal, obj.GlucoseUnitLabel);
                 TraceTendance(obj.TrendArrow);
+                // Display unit label if available
+                if (obj.GlucoseUnitLabel) {
+                    GH("unit", obj.GlucoseUnitLabel);
+                }
             }
         }
     };

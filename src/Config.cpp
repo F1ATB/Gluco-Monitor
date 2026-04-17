@@ -56,6 +56,7 @@ int16_t GlycemieVal=0;
 int8_t TrendArrow = 0; // 0=non défini, 1=Flèche vers le bas, 2=Flèche vers le bas à droite, 3=Flèche vers la droite, 4=Flèche vers le haut à droite, 5=Flèche vers le haut
 unsigned long lastGlyUnixTime = 0; // Heure de la dernière glycémie reçue en format Unix Time
 int16_t targetLow=70,targetHigh=180; //Seuils zone verte
+GlucoseUnit glucoseUnit = GLUCOSE_UNIT_MGDL;
 
 
 //Generaux
@@ -76,6 +77,24 @@ unsigned long TimerAutorisationBruteMillis=0;
 // PSRAM
 EXT_RAM_BSS_ATTR char MessageEcran[8192];
 EXT_RAM_BSS_ATTR String LoginJSON = "", GraphJSON = "",ConnectionJSON = "";
+
+String formatGlucoseValue(int16_t mgdl)
+{
+    if (glucoseUnit == GLUCOSE_UNIT_MMOLL)
+    {
+        return String(float(mgdl) / 18.0f, 1);
+    }
+    return String(mgdl);
+}
+
+String getGlucoseUnitLabel()
+{
+    if (glucoseUnit == GLUCOSE_UNIT_MMOLL)
+    {
+        return "mmol/L";
+    }
+    return "mg/dL";
+}
 
 void clearData()
 {

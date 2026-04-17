@@ -86,6 +86,7 @@ inline const char *LangES = R"====(
   "SendBinBut":"Enviar binario",
   "AutoOnMonitor":"Autoriza el acceso en el monitor",
   "SensorType":"Tipo de Sensor",
+  "GlucoseUnit":"Unidad de glucosa",
   "SetDexcom":"Configurar parámetros de Dexcom",
   "UsernameDexcom":"Nombre de usuario Dexcom Share",
   "PasseDexcom":"Contraseña Dexcom Share",

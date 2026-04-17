@@ -9,6 +9,11 @@ enum SensorType {
     SENSOR_DEXCOM = 1
 };
 
+enum GlucoseUnit {
+    GLUCOSE_UNIT_MGDL = 0,
+    GLUCOSE_UNIT_MMOLL = 1
+};
+
 #define RecurrenceGlycemie 120000 // 2 minutes
 
 //========= MACRO =========
@@ -55,7 +60,8 @@ extern int16_t pointCountGly;
 extern String Glycemie;
 extern int8_t TrendArrow;
 extern unsigned long lastGlyUnixTime;
-extern int16_t GlycemieVal, targetLow,targetHigh; 
+extern int16_t GlycemieVal, targetLow,targetHigh;
+extern GlucoseUnit glucoseUnit;
 
 extern String ES, FS, GS, RS, US;
 
@@ -73,3 +79,6 @@ extern EXT_RAM_BSS_ATTR String LoginJSON, GraphJSON, ConnectionJSON;
 
 // Clear all data (glucose, Dexcom cache, LibreView cache) when switching accounts
 void clearData();
+
+String formatGlucoseValue(int16_t mgdl);
+String getGlucoseUnitLabel();

@@ -86,6 +86,7 @@ inline const char *LangEN = R"====(
   "SendBinBut":"Send binary",
   "AutoOnMonitor":"Authorize access on the monitor",
   "SensorType":"Sensor Type",
+  "GlucoseUnit":"Glucose Unit",
   "SetDexcom":"Set Dexcom parameters",
   "UsernameDexcom":"Dexcom Share username",
   "PasseDexcom":"Dexcom Share password",
