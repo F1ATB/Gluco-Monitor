@@ -18,6 +18,4 @@ function SetTraduction(){
 
 }
 
-
-
 )====";

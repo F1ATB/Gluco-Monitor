@@ -126,7 +126,7 @@ const char *MainHtml = R"====(
 
                 <text id="valeur" x="150" y="150" font-size="60" text-anchor="middle" fill="white">0</text>
 
-                <text id="mg" x="270" y="165" font-size="15" text-anchor="middle" fill="white">mg/dl</text>
+                <text id="unit" x="270" y="165" font-size="15" text-anchor="middle" fill="white">mg/dl</text>
 
             </svg>
 

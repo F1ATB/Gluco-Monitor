@@ -28,7 +28,7 @@ function arc(start, end) {
 
 /* aiguille */
 
-function setValue(v) { //Valeur de la Glycemie
+function setValue(v, unitLabel) { //Valeur de la Glycemie
     let x1, y1, x2, y2, x3, y3;
     let angle = -90 + (v * 180 / 400);
     let angle1 = -90;
@@ -39,6 +39,9 @@ function setValue(v) { //Valeur de la Glycemie
     GID("z2").setAttribute("d", arc(angle1, angle2));
     angle1 = angle2;
     angle2 = -90 + (300 * 180 / 400);
+    if(glucoseUnit==1) { //mmol/L
+        angle2 = -90 + (16*18 * 180 / 400);
+    }
     GID("z3").setAttribute("d", arc(angle1, angle2));
     GID("z4").setAttribute("d", arc(angle2, 90));
 
@@ -53,7 +56,15 @@ function setValue(v) { //Valeur de la Glycemie
     y3 = p.y;
     let aig = document.getElementById("aiguille");
     aig.setAttribute("points", `${x1},${y1} ${x2},${y2} ${x3},${y3}`);
-    GID("valeur").textContent = Math.round(v);
+    
+    // Format value based on unit - gauge uses mg/dL for positioning, display shows correct unit
+    let displayValue;
+    if (unitLabel === "mmol/L") {
+        displayValue = (v / 18.0).toFixed(1);
+    } else {
+        displayValue = Math.round(v);
+    }
+    GID("valeur").textContent = displayValue;
 }
 
 /* demo animation */
@@ -103,19 +114,37 @@ function TraceGraphe(glucoseHeure,glucoseValues) {
     S += `<svg viewBox="0 0 550 220" id="SvgGraphe">`;
 
     //==== Rectangles du fond ================
-    S += `<text  class="graduationD" x=${X0 - 10}   y=${Y0 - H + 5}  >400</text>`;
-    S += `<line x1=${X0} y1=${Y0 - H} x2=${X0-5} y2=${Y0 - H} style="stroke:white;stroke-width:2" />`;
-    S += `<rect width=${W} height=${H} x=${X0} y=${Y0 - H}  fill="rgba(44, 1, 1, 0.8)" />`;
-    let H1 = H * 300 / 400;
-    S += `<text  class="graduationD" x=${X0 - 10}   y=${Y0 - H1 + 5}  >300</text>`;
+    let TargetHigh = targetHigh;
+    let TargetLow = targetLow;
+    let Seuil400=400;
+    let Seuil300=300;
+    let H1 = H * 400 / 400;
+    let H2 = H * 300 / 400;
+    if(glucoseUnit==1) { //mmol/L
+        TargetHigh = targetHigh/18
+        TargetLow = targetLow/18;
+        TargetHigh=TargetHigh.toFixed(1);
+        TargetLow=TargetLow.toFixed(1);
+        Seuil400=22;
+        Seuil300=16;
+        H1 = H * Seuil400 * 18 / 400;
+        H2 = H * Seuil300 * 18 / 400;
+        Seuil400=Seuil400.toFixed(1);
+        Seuil300=Seuil300.toFixed(1);
+    }
+    S += `<text  class="graduationD" x=${X0 - 10}   y=${Y0 - H + 5}  >` + Seuil400 + `</text>`;
     S += `<line x1=${X0} y1=${Y0 - H1} x2=${X0-5} y2=${Y0 - H1} style="stroke:white;stroke-width:2" />`;
-    S += `<rect width=${W} height=${H1} x=${X0} y=${Y0 - H1}  fill="rgba(56, 36, 1, 0.8)" />`;
+    S += `<rect width=${W} height=${H1} x=${X0} y=${Y0 - H1}  fill="rgba(44, 1, 1, 0.8)" />`;
+    
+    S += `<text  class="graduationD" x=${X0 - 10}   y=${Y0 - H2 + 5}  >` + Seuil300 + `</text>`;
+    S += `<line x1=${X0} y1=${Y0 - H2} x2=${X0-5} y2=${Y0 - H2} style="stroke:white;stroke-width:2" />`;
+    S += `<rect width=${W} height=${H2} x=${X0} y=${Y0 - H2}  fill="rgba(56, 36, 1, 0.8)" />`;
     H1 = H * targetHigh / 400;
-    S += `<text  class="graduationD" x=${X0 - 10}   y=${Y0 - H1 + 5}  >` + targetHigh + `</text>`;
+    S += `<text  class="graduationD" x=${X0 - 10}   y=${Y0 - H1 + 5}  >` + TargetHigh + `</text>`;
     S += `<line x1=${X0} y1=${Y0 - H1} x2=${X0-5} y2=${Y0 - H1} style="stroke:white;stroke-width:2" />`;
     S += `<rect width=${W} height=${H1} x=${X0} y=${Y0 - H1}  fill="rgba(0, 29, 0, 0.8)" />`;
     H1 = H * targetLow / 400;
-    S += `<text  class="graduationD" x=${X0 - 10}   y=${Y0 - H1 + 6}  >` + targetLow + `</text>`;
+    S += `<text  class="graduationD" x=${X0 - 10}   y=${Y0 - H1 + 6}  >` + TargetLow + `</text>`;
     S += `<line x1=${X0} y1=${Y0 - H1} x2=${X0-5} y2=${Y0 - H1} style="stroke:white;stroke-width:2" />`;
     S += `<rect width=${W} height=${H1} x=${X0} y=${Y0 - H1}  fill="rgba(0,0,64,0.8" />`;
     //========Courbe=================
@@ -196,8 +225,12 @@ function LoadLGlycemie() {
                 targetLow = obj.targetLow;
                 targetHigh = obj.targetHigh;
                 lastGlyUnixTime = obj.lastGlyUnixTime;
-                setValue(obj.GlycemieVal);
+                setValue(obj.GlycemieVal, obj.GlucoseUnitLabel);
                 TraceTendance(obj.TrendArrow);
+                // Display unit label if available
+                if (obj.GlucoseUnitLabel) {
+                    GH("unit", obj.GlucoseUnitLabel);
+                }
             }
         }
     };

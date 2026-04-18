@@ -48,12 +48,30 @@ void AccueiLoop()
     }
     else
     {
-
+        bool tooOld = AgeGlycemie / 60 > 20;
+        uint16_t glucoseInfoColor = tooOld ? RGB565(50, 50, 50) : RGB565_WHITE;
+        if (tooOld)
+        {
+            CanvaAccueil->setFont(u8g2_font_helvB18_tf);
+            // Get text bounds for background rectangle
+            int16_t x1, y1;
+            uint16_t w, h;
+            String text = T("WaitGluco");
+            CanvaAccueil->getTextBounds(utf8ToLatin15(text), 0, 0, &x1, &y1, &w, &h);
+            // Draw black background rectangle
+            int16_t rectX = W2 - w / 2 - 2;
+            int16_t rectY = EcranH / 9 - h - 2;
+            CanvaAccueil->fillRect(rectX, rectY, w + 4, h + 8, RGB565_BLACK);
+            // Draw text
+            CanvaAccueil->setTextColor(RGB565_RED);
+            PrintCentre(CanvaAccueil, text, W2, EcranH / 9, 1);
+            CanvaAccueil->setTextColor(glucoseInfoColor);
+        }
         CanvaAccueil->setFont(u8g2_font_inb63_mn);
-        PrintCentre(CanvaAccueil, Glycemie, W2, C + 25, 1);
+        PrintCentre(CanvaAccueil, formatGlucoseValue(GlycemieVal), W2, C + 25, 1);
 
         CanvaAccueil->setFont(u8g2_font_10x20_tf);
-        PrintGauche(CanvaAccueil, "mg/dL", W2 + R0, C + 20, 1);
+        PrintGauche(CanvaAccueil, getGlucoseUnitLabel(), W2 + R0, C + 20, 1);
 
         Teta0 = -180 + 18 * GlycemieVal / 40;
         if (Teta0 > 0)
@@ -62,7 +80,7 @@ void AccueiLoop()
             Teta0 = -180;
         float T = float(Teta0) * 3.14 / 180.0; // Conversion en radians
         R0 = 0.8 * R0;
-        CanvaAccueil->fillTriangle(W2 + R1 * cos(T), C + R1 * sin(T), W2 + R0 * cos(T - 0.2), C + R0 * sin(T - 0.2), W2 + R0 * cos(T + 0.2), C + R0 * sin(T + 0.2), RGB565_WHITE); // Aiguille
+        CanvaAccueil->fillTriangle(W2 + R1 * cos(T), C + R1 * sin(T), W2 + R0 * cos(T - 0.2), C + R0 * sin(T - 0.2), W2 + R0 * cos(T + 0.2), C + R0 * sin(T + 0.2), glucoseInfoColor); // Aiguille
 
         // Flèche tendance
         int16_t X0 = EcranW / 6;
@@ -131,11 +149,12 @@ void AccueiLoop()
             y4 = 50; // Flèche vers le haut fort
             break;
         }
-        CanvaAccueil->fillTriangle(X0 + x0, Y0 + y0, X0 + x1, Y0 + y1, X0 + x2, Y0 + y2, RGB565_WHITE); // Aiguille
-        CanvaAccueil->fillTriangle(X0 + x3, Y0 + y3, X0 + x1, Y0 + y1, X0 + x4, Y0 + y4, RGB565_WHITE);
+        CanvaAccueil->fillTriangle(X0 + x0, Y0 + y0, X0 + x1, Y0 + y1, X0 + x2, Y0 + y2, glucoseInfoColor); // Aiguille
+        CanvaAccueil->fillTriangle(X0 + x3, Y0 + y3, X0 + x1, Y0 + y1, X0 + x4, Y0 + y4, glucoseInfoColor);
     }
     // Ecrit durée depuis la dernière glycémie
     CanvaAccueil->setFont(u8g2_font_helvB18_tf);
+    CanvaAccueil->setTextColor(RGB565_WHITE);
     if (HeureValide && lastGlyUnixTime > 0)
     {
 
@@ -188,7 +207,7 @@ void AccueiLoop()
     // Trace courbe glycemie
     if (pointCountGly > 1)
     {
-        int16_t X0 = 24;
+        int16_t X0 = 30;
         int16_t Y0 = EcranH / 1.9;
         int16_t W = EcranW - X0;
         int16_t H = EcranH * 0.37;
@@ -204,12 +223,22 @@ void AccueiLoop()
         uint16_t Couleurs[] = {RGB565_BLUE, RGB565_GREEN, RGB565_ORANGE, RGB565_RED};
         uint16_t CouleursFond[] = {C_bleuFonce, C_vertFonce, C_orangeFonce, C_rougeFonce};
         int seuilCoul[] = {0, 70, 180, 300, 400};
+        seuilCoul[1]= targetLow;
+        seuilCoul[2]= targetHigh;
+        if(glucoseUnit==1) { //mmol/L
+            seuilCoul[3]= 16*18;
+            seuilCoul[4]= 22*18;
+        }
         int idxCoul = 0;
         for (int c = 0; c < 4; c++) // Trace fond graphique
         {
             int16_t y2 = EcranH10 - H * seuilCoul[c] / 400;
             y = EcranH10 - H * seuilCoul[c + 1] / 400;
-            PrintDroite(CanvaAccueil, String(seuilCoul[c + 1]), X0, y, 1);
+            String Seuil= String(seuilCoul[c + 1]);
+            if(glucoseUnit==1) { //mmol/L
+                Seuil= String(float(seuilCoul[c + 1]) / 18.0f, 1);
+            }
+            PrintDroite(CanvaAccueil, Seuil, X0, y, 1);
             CanvaAccueil->fillRect(X0, y, W, y2 - y, CouleursFond[c]);
         }
         for (int i = 0; i < pointCountGly; i++)
@@ -254,6 +283,9 @@ void Trace_Gauge(Arduino_Canvas *canva)
     canva->fillArc(W2, C, R0, R1, Teta0, Teta1, RGB565_GREEN);
     Teta0 = Teta1;
     Teta1 = -180 + 180 * 300 / 400;
+    if(glucoseUnit==1) { //mmol/L
+        Teta1 = -180 + 180 * 16*18 / 400;
+    }
     canva->fillArc(W2, C, R0, R1, Teta0, Teta1, RGB565_ORANGE);
     Teta0 = Teta1;
     Teta1 = 0;

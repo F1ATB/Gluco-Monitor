@@ -217,10 +217,10 @@ void getDexcomReadings()
             }
             
             String DateGly = unixToTimestamp(lastGlyUnixTime);
-            EcranPrintln(HEURE + T("LastGlyco") + Glycemie + " mg/dl " + T("le") + DateGly);
+            EcranPrintln(HEURE + T("LastGlyco") + formatGlucoseValue(GlycemieVal) + " " + getGlucoseUnitLabel() + " " + T("le") + DateGly);
             lastReceptionGlycMillis = millis();
             
-            Serial.println("Glycémie: " + Glycemie + " mg/dl");
+            Serial.println("Glycémie: " + formatGlucoseValue(GlycemieVal) + " " + getGlucoseUnitLabel());
             Serial.println("TrendArrow: " + String(TrendArrow));
             Serial.println("Timestamp: " + String(lastGlyUnixTime));
             

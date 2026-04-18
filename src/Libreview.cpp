@@ -131,7 +131,7 @@ void getConnection()
     String DateGly = doc["data"][0]["glucoseItem"]["Timestamp"].as<String>();
     targetLow = doc["data"][0]["targetLow"];
     targetHigh = doc["data"][0]["targetHigh"];
-    S = HEURE + T("LastGlyco") +Glycemie+ " mg/dl " + T("le") + DateGly;
+    S = HEURE + T("LastGlyco") + formatGlucoseValue(GlycemieVal) + " " + getGlucoseUnitLabel() + " " + T("le") + DateGly;
     EcranPrintln(S);
     TrendArrow = doc["data"][0]["glucoseItem"]["TrendArrow"].as<int8_t>();
     lastReceptionGlycMillis = millis();
@@ -234,7 +234,7 @@ void getGraph()
     int value = item["ValueInMgPerDl"];
     const char *timestamp = item["Timestamp"];
     unsigned long unixTime = convertToUnix(timestamp);
-    Serial.println("Glucose: " + String(value) + " mg/dL, Timestamp: " + String(timestamp) + ", Unix Time: " + String(unixTime));
+    Serial.println("Glucose: " + formatGlucoseValue(value) + " " + getGlucoseUnitLabel() + ", Timestamp: " + String(timestamp) + ", Unix Time: " + String(unixTime));
     if (pointCountGly + 1 < MAX_POINTS)
     {
       glucoseValues[pointCountGly] = value;

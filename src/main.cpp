@@ -7,6 +7,17 @@
  * This software is not affiliated with Dexcom, Inc. or any of its subsidiaries
  */
 
+ // ============ Gluco-Monitor versions  ===========
+
+ /*
+v1.0 : 1er version de base / First Version Freestyle Only in mg/dL
+v2.0 : Ajout du support du Dexcom  / Added Dexcom  support    
+v3.0 : Ajout du support des unités mmol/L  / Added support for mmol/L units 
+
+*/
+
+//Support available on : https://F1ATB.fr  Documentation and Forum in French and English
+
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>

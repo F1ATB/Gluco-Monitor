@@ -1,4 +1,4 @@
-https://github.com/user-attachments/assets/543aca45-7e8a-4507-a81c-04a6f4bc0d6f
+![Gluco-Monitor](https://github.com/user-attachments/assets/543aca45-7e8a-4507-a81c-04a6f4bc0d6f)
 # Gluco-Monitor (DIY)
 
 Gluco-Monitor is an open-source, low-cost device designed to display real-time glucose data from continuous glucose monitoring (CGM) systems such as **FreeStyle Libre** or **Dexcom**.

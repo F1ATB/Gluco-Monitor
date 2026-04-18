@@ -86,6 +86,7 @@ inline const char *LangFR = R"====(
   "SendBinBut":"Envoyer le binaire",
   "AutoOnMonitor":"Autorisez l'accès sur le moniteur",
   "SensorType":"Type de Capteur",
+  "GlucoseUnit":"Unité du glucose",
   "SetDexcom":"Définir les paramètres Dexcom",
   "UsernameDexcom":"Nom d'utilisateur Dexcom Share",
   "PasseDexcom":"Mot de passe Dexcom Share",

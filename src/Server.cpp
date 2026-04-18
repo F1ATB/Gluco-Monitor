@@ -72,7 +72,8 @@ void Init_Server()
       });
 
   server.on("/JS_Commun", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/javascript", String(JS_Commun) +"\nconst Version = '" + String(Version) +"';"); });
+            { String complement="\nconst Version = '" + String(Version) +"' ;\nconst glucoseUnit = " + String(glucoseUnit) + ";";
+              request->send(200, "text/javascript", String(JS_Commun) + complement); });
   server.on("/JS_Traduction", HTTP_GET, [](AsyncWebServerRequest *request)
             {  String file;
               switch(LaLangue)
@@ -106,6 +107,7 @@ void Init_Server()
   server.on("/ajaxGlycemie", HTTP_GET, [](AsyncWebServerRequest *request)
             {JsonDocument doc;
                 doc["GlycemieVal"] = GlycemieVal;
+                doc["GlucoseUnitLabel"] = getGlucoseUnitLabel();
                 doc["TrendArrow"] = TrendArrow;
                 doc["lastGlyUnixTime"] = lastGlyUnixTime;
                 doc["targetLow"] = targetLow;
