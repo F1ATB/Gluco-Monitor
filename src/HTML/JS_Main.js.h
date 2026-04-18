@@ -201,17 +201,60 @@ function TraceTendance(Tendance) { //Flèche
     let p1, p2, p3;
 
     let S = ``;
-    let Teta = 45 * (5 - Tendance); //1=bas vertical,5=haut vertical
+    // Map trend values: -1=DoubleDown, 0=undefined, 1=Down, 2=DownRight, 3=Flat, 4=UpRight, 5=Up, 6=DoubleUp
+    let Teta;
+    let isDouble = false;
+    
+    if (Tendance === -1) { // DoubleDown
+        Teta = 180; // Vertical down
+        isDouble = true;
+    } else if (Tendance === 6) { // DoubleUp
+        Teta = 0; // Vertical up
+        isDouble = true;
+    } else {
+        Teta = 45 * (5 - Tendance); // Original mapping for 0-5
+    }
 
     S += `<svg viewBox="0 0 60 60" id="SvgFlecheTendance">`;
-    p1 = polar(X0, Y0, 20, Teta);
-    p2 = polar(X0, Y0, 15, Teta + 90);
-    p3 = polar(X0, Y0, 15, Teta - 90);
+    
+    if (isDouble) {
+        // Draw two complete arrows side by side (horizontally offset) for double trends
+        let offset = 15; // Horizontal distance between arrows
+        
+        // First arrow (left side)
+        let X1 = X0 - offset;
+        let Y1 = Y0;
+        
+        p1 = polar(X1, Y1, 20, Teta);
+        p2 = polar(X1, Y1, 15, Teta + 90);
+        p3 = polar(X1, Y1, 15, Teta - 90);
+        S += `<polyline  points="${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}" style="fill:white;" />`;
+        p2 = polar(X1, Y1, 30, Teta + 170);
+        p3 = polar(X1, Y1, 30, Teta - 170);
+        S += `<polyline  points="${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}" style="fill:white;" />`;
+        
+        // Second arrow (right side)
+        let X2 = X0 + offset;
+        let Y2 = Y0;
+        
+        p1 = polar(X2, Y2, 20, Teta);
+        p2 = polar(X2, Y2, 15, Teta + 90);
+        p3 = polar(X2, Y2, 15, Teta - 90);
+        S += `<polyline  points="${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}" style="fill:white;" />`;
+        p2 = polar(X2, Y2, 30, Teta + 170);
+        p3 = polar(X2, Y2, 30, Teta - 170);
+        S += `<polyline  points="${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}" style="fill:white;" />`;
+    } else {
+        // Draw single arrow for normal trends
+        p1 = polar(X0, Y0, 20, Teta);
+        p2 = polar(X0, Y0, 15, Teta + 90);
+        p3 = polar(X0, Y0, 15, Teta - 90);
 
-    S += `<polyline  points="${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}" style="fill:white;" />`;
-    p2 = polar(X0, Y0, 30, Teta + 170);
-    p3 = polar(X0, Y0, 30, Teta - 170);
-    S += `<polyline  points="${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}" style="fill:white;" />`;
+        S += `<polyline  points="${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}" style="fill:white;" />`;
+        p2 = polar(X0, Y0, 30, Teta + 170);
+        p3 = polar(X0, Y0, 30, Teta - 170);
+        S += `<polyline  points="${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}" style="fill:white;" />`;
+    }
 
     S += `</svg>`;
     GH("svgTendance", S);

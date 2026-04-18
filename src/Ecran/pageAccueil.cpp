@@ -86,8 +86,24 @@ void AccueiLoop()
         int16_t X0 = EcranW / 6;
         int16_t Y0 = EcranH / 6;
         int16_t x0, y0, x1, y1, x2, y2, x3, y3, x4, y4;
+        int16_t offset = 40;
         switch (TrendArrow)
         {
+        case -1: // DoubleDown
+            x0 = -20;
+            y0 = 0;
+            x1 = 0;
+            y1 = 20;
+            x2 = 20;
+            y2 = 0;
+            x3 = -10;
+            y3 = -50;
+            x4 = +10;
+            y4 = -50; // Double flèche vers le bas fort
+            // Draw second arrow for double down
+            CanvaAccueil->fillTriangle(X0 + x0 - offset, Y0 + y0, X0 + x1 - offset, Y0 + y1, X0 + x2 - offset, Y0 + y2, glucoseInfoColor); // Aiguille
+            CanvaAccueil->fillTriangle(X0 + x3 - offset, Y0 + y3, X0 + x1 - offset, Y0 + y1, X0 + x4 - offset, Y0 + y4, glucoseInfoColor);
+            break;
         case 1:
             x0 = -20;
             y0 = 0;
@@ -147,6 +163,21 @@ void AccueiLoop()
             y3 = 50;
             x4 = +10;
             y4 = 50; // Flèche vers le haut fort
+            break;
+        case 6: // DoubleUp
+            x0 = 20;
+            y0 = 0;
+            x1 = 0;
+            y1 = -20;
+            x2 = -20;
+            y2 = 0;
+            x3 = -10;
+            y3 = 50;
+            x4 = +10;
+            y4 = 50; // Double flèche vers le haut fort
+            // Draw second arrow for double up
+            CanvaAccueil->fillTriangle(X0 + x0 - offset, Y0 + y0, X0 + x1 - offset, Y0 + y1, X0 + x2 - offset, Y0 + y2, glucoseInfoColor); // Aiguille
+            CanvaAccueil->fillTriangle(X0 + x3 - offset, Y0 + y3, X0 + x1 - offset, Y0 + y1, X0 + x4 - offset, Y0 + y4, glucoseInfoColor);
             break;
         }
         CanvaAccueil->fillTriangle(X0 + x0, Y0 + y0, X0 + x1, Y0 + y1, X0 + x2, Y0 + y2, glucoseInfoColor); // Aiguille
