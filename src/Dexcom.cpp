@@ -192,18 +192,18 @@ void getDexcomReadings()
             GlycemieVal = mgdl;
             Glycemie = String(mgdl);
             
-            // Map Dexcom trend to LibreView format
-            // LibreView: 1=Down, 2=DownRight, 3=Right(Flat), 4=UpRight, 5=Up
-            TrendArrow = 3; // Default to Flat
+            // Map Dexcom trend
+            // -1=DoubleDown, 0=undefined, 1=Down, 2=DownRight, 3=Flat, 4=UpRight, 5=Up, 6=DoubleUp
+            TrendArrow = 0; // Default to undefined
             if (trend != nullptr) {
                 String trendStr = String(trend);
-                if (trendStr == "DoubleUp") TrendArrow = 5;        // Up
+                if (trendStr == "DoubleUp") TrendArrow = 6;        // DoubleUp
                 else if (trendStr == "SingleUp") TrendArrow = 5;   // Up
                 else if (trendStr == "FortyFiveUp") TrendArrow = 4; // UpRight
                 else if (trendStr == "Flat") TrendArrow = 3;       // Right (Flat)
                 else if (trendStr == "FortyFiveDown") TrendArrow = 2; // DownRight
                 else if (trendStr == "SingleDown") TrendArrow = 1; // Down
-                else if (trendStr == "DoubleDown") TrendArrow = 1; // Down
+                else if (trendStr == "DoubleDown") TrendArrow = -1; // DoubleDown
             }
             
             // Parse timestamp - Dexcom format: "Date(1234567890000)"
